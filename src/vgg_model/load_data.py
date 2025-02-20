@@ -4,7 +4,7 @@ import os
 
 
 class DebrisFlow(Dataset):
-    def __init__(self, root_dir="./data", transform=None):
+    def __init__(self, root_dir="../data", transform=None):
         self.root_dir = root_dir
         self.data = []
         self.transform = transform

@@ -3,3 +3,5 @@ scikit-learn==1.6.1
 notebook==7.3.2
 torch==2.6.0
 Pillow==11.1.0
+torchvision==0.21.0
+tensorboard==2.19.0
