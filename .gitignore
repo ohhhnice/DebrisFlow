@@ -1,4 +1,3 @@
-data/
 external_project/SAM/
 .venv/
 *.pth
