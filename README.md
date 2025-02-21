@@ -1,3 +1,5 @@
+# 项目框架
+```
 project_name/
 │
 ├── data/                        # 存放数据
@@ -34,8 +36,17 @@ project_name/
 ├── requirements.txt             # 项目依赖
 ├── README.md                    # 项目说明
 └── .gitignore                   # Git忽略文件
+```
 
+# 初始化项目
+## win 下情况
+```javascript
+.\setup.bat
+```
 
+## mac情况
+```
+git clone https://github.com/facebookresearch/segment-anything.git external_project\SAM
 
-克隆外部项目库: 
-    git clone https://github.com/facebookresearch/segment-anything.git external_project/SAM
+pip install -r requirements.txt
+```
