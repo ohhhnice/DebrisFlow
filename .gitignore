@@ -1,3 +1,4 @@
 external_project/SAM/
 .venv/
 *.pth
+*.mp4
