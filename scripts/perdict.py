@@ -6,10 +6,10 @@ FILE = Path(__file__).resolve()
 ROOT = FILE.parents[1]
 if str(ROOT) not in sys.path:
     sys.path.append(str(ROOT))
+sys.path.append(str(ROOT / "external_project"))
 
 from argparse import ArgumentParser
 from src.data_preprocessing.sam_video import SamVideo
-from src.utils.load_video import extract_frames
 from src.extract_features.extract_features import ExtractFeatures
 from src.XGBoost.predict import xgb_predict
 
@@ -17,97 +17,100 @@ from src.XGBoost.predict import xgb_predict
 class DebrisFlowPredict:
     def __init__(
         self,
-        src_folder_path: str,
-        video_Name: str,
-        samed_video_path: str,
-        features_path: str,
-        output_path: str,
+        src_folder: str,
+        video_name: str,
+        samed_video_folder: str,
+        features_folder: str,
+        output_folder: str,
         slice_windows_size: int,
         XGB_model_path: str,
+        point_coordinates: list[int],
+        extract_freq: int,
+        **kwargs,
     ):
-        self.src_folder_path = src_folder_path
-        self.video_Name = video_Name
-        self.samed_video_path = samed_video_path
-        self.features_path = features_path
-        self.output_path = output_path
+        self.src_folder = src_folder
+        self.video_name = video_name
+        self.samed_video_folder = samed_video_folder
+        self.features_folder = features_folder
+        self.output_folder = output_folder
         self.slice_windows_size = slice_windows_size
         self.XGB_model_path = XGB_model_path
+        self.point_coordinates = point_coordinates
+        self.extract_freq = extract_freq
 
-        self.sam = SamVideo()
+        self.sam = SamVideo(
+            model_type=kwargs["sam_model_type"],
+            model_device=kwargs["sam_model_device"],
+            checkpoint=kwargs["sam_checkpoint"],
+        )
         self.extract_features = ExtractFeatures()
 
-        self.loadVideoInfo()
-
     def predict_video(self):
-        os.makedirs(self.samed_video_path, exist_ok=True)
+        os.makedirs(self.samed_video_folder, exist_ok=True)
         self.sam.predict_video(
-            self.src_folder_path, self.video_Name, self.samed_video_path
+            self.video_name,
+            self.src_folder,
+            self.samed_video_folder,
+            self.point_coordinates,
+            self.extract_freq,
         )
-        os.makedirs(self.features_path, exist_ok=True)
+        os.makedirs(self.features_folder, exist_ok=True)
         self.extract_features.extract_all_features(
-            self.samed_video_path,
-            self.features_path,
-            self.video_Name,
+            self.samed_video_folder,
+            self.features_folder,
+            self.video_name,
             self.slice_windows_size,
         )
         xgb_predict(
             None,
-            self.src_folder_path,
-            self.video_Name,
+            self.src_folder,
+            self.video_name,
             self.XGB_model_path,
-            self.output_path,
-            self.features_path,
+            self.output_folder,
+            self.features_folder,
         )
 
     def predict_frame(self, frame_idx: int):
-        os.makedirs(self.samed_video_path, exist_ok=True)
-        self.sam.predict_video(
-            self.src_folder_path, self.video_Name, self.samed_video_path
+        os.makedirs(self.samed_video_folder, exist_ok=True)
+        self.sam.predict_frame(
+            self.src_folder, self.video_name, self.samed_video_folder
         )
         array_list = self.extract_features.get_array_list(
-            self.src_folder_path, self.video_Name, frame_idx, self.slice_windows_size
+            self.src_folder, self.video_name, frame_idx, self.slice_windows_size
         )
         features_array = self.extract_features.extract_frame_features(array_list)
         xgb_predict(
             features_array,
-            self.src_folder_path,
-            self.video_Name,
+            self.src_folder,
+            self.video_name,
             self.XGB_model_path,
-            self.output_path,
+            self.output_folder,
         )
-
-    def loadVideoInfo(self):
-        self.videoFPS, self.videoFrameCount, self.imageShape = extract_frames(
-            os.path.join(self.src_folder_path, self.video_Name)
-        )  # fps, 帧数, 图像大小
-        print("videoFPS: ", self.videoFPS)
-        print("videoFrameCount: ", self.videoFrameCount)
-        print("imageShape: ", self.imageShape)
 
 
 def parse_opt():
     parser = ArgumentParser()
-    parser.add_argument("--video_Name", type=str, default="3.mp4", help="video name")
+    parser.add_argument("--video_name", type=str, default="3.mp4", help="video name")
     parser.add_argument(
-        "--src_folder_path",
+        "--src_folder",
         type=str,
         default="./data/sam/raw",
         help="video folder path",
     )
     parser.add_argument(
-        "--samed_video_path",
+        "--samed_video_folder",
         type=str,
         default="./data/sam/processed",
         help="processed video path by SAM",
     )
     parser.add_argument(
-        "--features_path",
+        "--features_folder",
         type=str,
         default="./data/extracted_features",
         help="The path saving extracted features based on samed video",
     )
     parser.add_argument(
-        "--output_path",
+        "--output_folder",
         type=str,
         default="./data/output",
         help="The path saving processed video and csv file by all workflow",
@@ -124,6 +127,37 @@ def parse_opt():
         default=None,
         help="The trained XGBoost model path",
     )
+    parser.add_argument(
+        "--point_coordinates",
+        nargs="+",
+        type=int,
+        default=[800, 700],
+        help="The coordinates of the object of interest.",
+    )
+    parser.add_argument(
+        "--extract_freq",
+        type=int,
+        default=30,
+        help="The frequency to extract frames",
+    )
+    parser.add_argument(
+        "--sam_model_type",
+        type=str,
+        default="vit_h",
+        help="The model type for SAM (vit_h, vit_base, vit_large, vit_base_patch16_224)",
+    )
+    parser.add_argument(
+        "--sam_model_device",
+        type=str,
+        default="cpu",
+        help="The device for SAM model (cpu, cuda)",
+    )
+    parser.add_argument(
+        "--sam_checkpoint",
+        type=str,
+        default="models\pretrained\sam\sam_vit_h_4b8939.pth",
+        help="The checkpoint for SAM model",
+    )
     opt = parser.parse_args()
     return opt
 
@@ -131,10 +165,5 @@ def parse_opt():
 if __name__ == "__main__":
     opt = parse_opt()
     DebrisFlow = DebrisFlowPredict(**vars(opt))
-    print(DebrisFlow.video_Name)
-    print(DebrisFlow.src_folder_path)
-    print(DebrisFlow.samed_video_path)
-    print(DebrisFlow.features_path)
-    print(DebrisFlow.output_path)
-    print(DebrisFlow.slice_windows_size)
+    DebrisFlow.predict_video()
     # DebrisFlow.predict_video()

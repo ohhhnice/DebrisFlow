@@ -16,7 +16,7 @@ class ExtractFeatures:
 
     def get_array_list(
         self,
-        src_folder_path: str,
+        src_folder: str,
         video_name: str,
         frame_idx: int,
         slice_windows_size: int,

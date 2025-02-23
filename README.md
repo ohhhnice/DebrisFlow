@@ -1,4 +1,5 @@
 # 项目框架
+
 ```
 project_name/
 │
@@ -25,7 +26,7 @@ project_name/
 │   │   ├── load_data.py         # VGG模型对应的数据加载
 │   │   └── train.py             # VGG模型训练
 |   ├── XGBoost/                 # XGBoost模型代码
-|   |   └── train.py             # XGBoost模型训练 
+|   |   └── train.py             # XGBoost模型训练
 │   └── utils/                   # 工具函数（如数据增强、日志记录等）
 │
 ├── scripts/                     # 脚本文件（如训练、测试脚本）
@@ -39,14 +40,25 @@ project_name/
 ```
 
 # 初始化项目
+
 ## win 下情况
+
 ```javascript
 .\setup.bat
 ```
 
-## mac情况
+## mac 情况
+
 ```
 git clone https://github.com/facebookresearch/segment-anything.git external_project\SAM
 
 pip install -r requirements.txt
 ```
+
+Click the links below to download the checkpoint for the corresponding model type.
+
+- **`default` or `vit_h`: [ViT-H SAM model.](https://dl.fbaipublicfiles.com/segment_anything/sam_vit_h_4b8939.pth)**
+- `vit_l`: [ViT-L SAM model.](https://dl.fbaipublicfiles.com/segment_anything/sam_vit_l_0b3195.pth)
+- `vit_b`: [ViT-B SAM model.](https://dl.fbaipublicfiles.com/segment_anything/sam_vit_b_01ec64.pth)
+
+将文件放到 ./models/pretrained/sam/ 路径下（需要手动创建）
