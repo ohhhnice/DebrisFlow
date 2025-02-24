@@ -7,5 +7,7 @@ def extract_frames(video_path):
     frameCount = int(cap.get(cv2.CAP_PROP_FRAME_COUNT))
     _, frame = cap.read()
     cap.release()
+    print("=====" * 10)
     print(f"fps: {fps}\nframeCount: {frameCount}\nImage shape: {frame.shape[:2][::-1]}")
+    print("=====" * 10)
     return fps, frameCount, frame.shape[:2][::-1]

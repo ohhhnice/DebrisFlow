@@ -1,33 +1,116 @@
 import numpy as np
+import pandas as pd
+import os
+import cv2
+import sys
+from pathlib import Path
+from tqdm import tqdm
+import queue
+
+FILE = Path(__file__).resolve()
+ROOT = FILE.parents[2]
+if str(ROOT) not in sys.path:
+    sys.path.append(str(ROOT))
+
+from src.utils.load_video import extract_frames
 
 
 class ExtractFeatures:
-    def __init__(self):
-        pass
-
-    def extract_vgg_features(self, img_array):
-        pass
-
-    def calculate_grey_variance(self, img_list: list[np.array]):
-        pass
-
-    def extract_frame_features(self, img_array_list: np.array) -> np.array:
-        pass
-
-    def get_array_list(
+    def __init__(
         self,
+        video_name: str,
         src_folder: str,
-        video_name: str,
-        frame_idx: int,
-        slice_windows_size: int,
-    ) -> list[np.array]:
-        pass
-
-    def extract_all_features(
-        self,
-        src_folder_path: str,
-        dst_folder_path: str,
-        video_name: str,
+        dst_folder: str,
         slice_windows_size: int = 30,
     ):
-        pass
+        self.video_name = video_name
+        self.src_folder = src_folder
+        self.dst_folder = dst_folder
+        self.slice_windows_size = slice_windows_size
+        self.src_path = os.path.join(src_folder, video_name)
+
+        self.time_tmp_feat_queue = queue.Queue()
+        self.cap = cv2.VideoCapture(self.src_path)
+
+    def extract_video_features(self):
+        print("=" * 30 + " EXTRACT VIDEO FEATRUES " + "=" * 30 + "\n")
+        _, video_frame_count, _ = extract_frames(self.src_path)
+        if video_frame_count < self.slice_windows_size:
+            print("窗口取值过大!")
+            return
+
+        self.init_time_tmp_feat_queue()
+        os.makedirs(self.dst_folder, exist_ok=True)
+        base_name, _ = os.path.splitext(self.video_name)
+        dst_path = os.path.join(self.dst_folder, f"{base_name}.csv")
+
+        for frameIdx in tqdm(
+            range(video_frame_count - self.slice_windows_size + 1),
+            desc="Extract video features",
+            unit="frame",
+        ):
+            ret, frame = self.cap.read()
+            if not ret:
+                break
+            frame_feature = self.calculate_frame_features(frame)
+            if not os.path.exists(dst_path):
+                frame_feature.to_csv(dst_path, mode="w", header=True, index=False)
+            else:
+                frame_feature.to_csv(dst_path, mode="a", header=False, index=False)
+
+    def calculate_frame_features(self, frame: np.ndarray) -> np.ndarray:
+        time_tmp_feat = self.extract_frame_tmp_time_features(frame)
+        self.time_tmp_feat_queue.put(time_tmp_feat)
+        vgg_feat = self.extract_vgg_features(frame)
+        time_feat = self.calculate_time_features()
+        self.time_tmp_feat_queue.get()
+
+        merged_feat = np.concatenate((time_feat, vgg_feat), axis=0)
+        colnames = ["mean_grey", "area_ratio"] + [
+            f"vgg_{i}" for i in range(len(vgg_feat))
+        ]
+        return pd.DataFrame([merged_feat], columns=colnames)
+
+    def extract_vgg_features(self, frame: np.ndarray) -> np.ndarray:
+        return np.array([1, 2, 3])
+
+    def extract_frame_tmp_time_features(self, frame: np.ndarray) -> dict:
+        """灰度均值、面积比例"""
+        tmp_time_feat = {"mean_grey": np.mean(frame), "area_ratio": np.mean(frame != 0)}
+        return tmp_time_feat
+
+    def calculate_time_features(self) -> np.ndarray:
+        feat = []
+        feat.append(self.calculate_mean_grey_variance())
+        feat.append(self.calculate_area_ratio_variance())
+        return np.array(feat)
+
+    def calculate_mean_grey_variance(self) -> np.float64:
+        grey_list = []
+        for dic in self.time_tmp_feat_queue.queue:
+            grey_list.append(dic["mean_grey"])
+        return np.var(grey_list)
+
+    def calculate_area_ratio_variance(self) -> np.float64:
+        area_ratio_list = []
+        for dic in self.time_tmp_feat_queue.queue:
+            area_ratio_list.append(dic["area_ratio"])
+        return np.var(area_ratio_list)
+
+    def init_time_tmp_feat_queue(self):
+        cap = cv2.VideoCapture(self.src_path)
+        for _ in range(self.slice_windows_size - 1):
+            ret, frame = cap.read()
+            if not ret:
+                break
+            time_tmp_feat = self.extract_frame_tmp_time_features(frame)
+            self.time_tmp_feat_queue.put(time_tmp_feat)
+        cap.release()
+
+    def release(self):
+        if self.cap.isOpened():
+            self.cap.release()
+            print("视频资源已释放")
+
+    def __del__(self):
+        self.release()
