@@ -149,7 +149,7 @@ def parse_opt():
     parser.add_argument(
         "--sam_model_device",
         type=str,
-        default="cpu",
+        default="cuda",
         help="The device for SAM model (cpu, cuda)",
     )
     parser.add_argument(
