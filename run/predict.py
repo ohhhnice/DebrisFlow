@@ -17,8 +17,8 @@ from src.XGBoost.predict import xgb_predict
 class DebrisFlowPredict:
     def __init__(
         self,
-        src_folder: str,
         video_name: str,
+        src_folder: str,
         samed_video_folder: str,
         features_folder: str,
         output_folder: str,
@@ -43,24 +43,22 @@ class DebrisFlowPredict:
             model_device=kwargs["sam_model_device"],
             checkpoint=kwargs["sam_checkpoint"],
         )
-        self.extract_features = ExtractFeatures()
 
     def predict_video(self):
-        os.makedirs(self.samed_video_folder, exist_ok=True)
-        self.sam.predict_video(
+        samed_video_name = self.sam.predict_video(
             self.video_name,
             self.src_folder,
             self.samed_video_folder,
             self.point_coordinates,
             self.extract_freq,
         )
-        os.makedirs(self.features_folder, exist_ok=True)
-        self.extract_features.extract_all_features(
+        extract_features = ExtractFeatures(
+            samed_video_name,
             self.samed_video_folder,
             self.features_folder,
-            self.video_name,
             self.slice_windows_size,
         )
+        extract_features.extract_video_features()
         xgb_predict(
             None,
             self.src_folder,
@@ -71,16 +69,22 @@ class DebrisFlowPredict:
         )
 
     def predict_frame(self, frame_idx: int):
-        os.makedirs(self.samed_video_folder, exist_ok=True)
-        self.sam.predict_frame(
-            self.src_folder, self.video_name, self.samed_video_folder
+        samed_video_name = self.sam.predict_frame(
+            self.video_name,
+            self.src_folder,
+            self.samed_video_folder,
+            self.point_coordinates,
+            frame_idx,
+            self.slice_windows_size,
         )
-        array_list = self.extract_features.get_array_list(
-            self.src_folder, self.video_name, frame_idx, self.slice_windows_size
+        extract_features = ExtractFeatures(
+            samed_video_name,
+            self.samed_video_folder,
+            self.features_folder,
+            self.slice_windows_size,
         )
-        features_array = self.extract_features.extract_frame_features(array_list)
+        extract_features.extract_video_features()
         xgb_predict(
-            features_array,
             self.src_folder,
             self.video_name,
             self.XGB_model_path,
@@ -166,4 +170,3 @@ if __name__ == "__main__":
     opt = parse_opt()
     DebrisFlow = DebrisFlowPredict(**vars(opt))
     DebrisFlow.predict_video()
-    # DebrisFlow.predict_video()
