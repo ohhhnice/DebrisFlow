@@ -1,15 +1,27 @@
 import numpy as np
+import xgboost as xgb
+import pandas as pd
+import os
 
 
 def xgb_predict(
-    features_arrays: np.array,
-    src_video_path: str,
-    video_name: str,
+    features_file_name: str,
+    src_folder: str,
     model_path: str,
-    output_path: str,
-    features_path: str = None,
+    dst_folder: str,
 ) -> None:
-    """
-    有features_arrays，就不用features_path
-    """
-    pass
+    feature_path = os.path.join(src_folder, features_file_name)
+    save_path = os.path.join(dst_folder, features_file_name)
+
+    xgb_model = xgb.Booster()
+    xgb_model.load_model(model_path)
+
+    df = pd.read_csv(feature_path)
+    dmat = xgb.DMatrix(df)
+
+    pred_probs = xgb_model.predict(dmat)
+    pred_classes = (pred_probs > 0.5).astype(int)
+    df["prediction_prob"] = pred_probs
+    df["prediction"] = pred_classes
+
+    df.to_csv(save_path, index=False)

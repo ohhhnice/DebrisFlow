@@ -1,6 +1,6 @@
-import os
 import sys
 from pathlib import Path
+import torch
 
 FILE = Path(__file__).resolve()
 ROOT = FILE.parents[1]
@@ -26,6 +26,9 @@ class DebrisFlowPredict:
         XGB_model_path: str,
         point_coordinates: list[int],
         extract_freq: int,
+        vgg_model_weights_path: str,
+        feature_size: int,
+        device: str,
         **kwargs,
     ):
         self.src_folder = src_folder
@@ -37,6 +40,9 @@ class DebrisFlowPredict:
         self.XGB_model_path = XGB_model_path
         self.point_coordinates = point_coordinates
         self.extract_freq = extract_freq
+        self.vgg_model_weights_path = vgg_model_weights_path
+        self.feature_size = feature_size
+        self.device = device
 
         self.sam = SamVideo(
             model_type=kwargs["sam_model_type"],
@@ -56,16 +62,17 @@ class DebrisFlowPredict:
             samed_video_name,
             self.samed_video_folder,
             self.features_folder,
+            self.vgg_model_weights_path,
+            self.feature_size,
+            self.device,
             self.slice_windows_size,
         )
-        extract_features.extract_video_features()
+        features_file_name = extract_features.extract_video_features()
         xgb_predict(
-            None,
-            self.src_folder,
-            self.video_name,
+            features_file_name,
+            self.features_folder,
             self.XGB_model_path,
             self.output_folder,
-            self.features_folder,
         )
 
     def predict_frame(self, frame_idx: int):
@@ -81,18 +88,22 @@ class DebrisFlowPredict:
             samed_video_name,
             self.samed_video_folder,
             self.features_folder,
+            self.vgg_model_weights_path,
+            self.feature_size,
+            self.device,
             self.slice_windows_size,
         )
-        extract_features.extract_video_features()
+        features_file_name = extract_features.extract_video_features()
         xgb_predict(
-            self.src_folder,
-            self.video_name,
+            features_file_name,
+            self.features_folder,
             self.XGB_model_path,
             self.output_folder,
         )
 
 
 def parse_opt():
+    device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
     parser = ArgumentParser()
     parser.add_argument("--video_name", type=str, default="3.mp4", help="video name")
     parser.add_argument(
@@ -144,6 +155,18 @@ def parse_opt():
         default=30,
         help="The frequency to extract frames",
     )
+
+    parser.add_argument(
+        "--vgg_model_weights_path",
+        type=str,
+        default="models/trained/vgg/vgg19_epoch5_accuracy1.0_loss2.4331241250038147.pth",
+        help="vgg model weights path",
+    )
+    parser.add_argument(
+        "--feature_size", type=int, default=200, help="the number of the features"
+    )
+    parser.add_argument("--device", type=str, default=device)
+
     parser.add_argument(
         "--sam_model_type",
         type=str,
@@ -159,7 +182,7 @@ def parse_opt():
     parser.add_argument(
         "--sam_checkpoint",
         type=str,
-        default="models\pretrained\sam\sam_vit_h_4b8939.pth",
+        default="models/pretrained/sam/sam_vit_h_4b8939.pth",
         help="The checkpoint for SAM model",
     )
     opt = parser.parse_args()
