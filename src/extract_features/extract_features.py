@@ -91,12 +91,18 @@ class ExtractFeatures:
         img = frame.astype(np.uint8)
         img = Image.fromarray(img)
         img = transform(img).unsqueeze(0).to(self.device)
-        vgg19_feature = self.vgg19(img).squeeze().numpy()
+        vgg19_feature = self.vgg19(img).squeeze()
+        if vgg19_feature.is_cuda:
+            vgg19_feature = vgg19_feature.cpu().detach()
+        vgg19_feature = vgg19_feature.numpy()
         return vgg19_feature
 
     def extract_frame_tmp_time_features(self, frame: np.ndarray) -> dict:
         """灰度均值、面积比例"""
-        tmp_time_feat = {"mean_grey": np.mean(frame), "area_ratio": np.mean(frame != 0)}
+        tmp_time_feat = {
+            "mean_grey": np.mean(frame) * np.sum(frame != -1) / np.sum(frame != 0),
+            "area_ratio": np.mean(frame != 0),
+        }
         return tmp_time_feat
 
     def calculate_time_features(self) -> np.ndarray:

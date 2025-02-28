@@ -24,4 +24,5 @@ def xgb_predict(
     df["prediction_prob"] = pred_probs
     df["prediction"] = pred_classes
 
+    os.makedirs(dst_folder, exist_ok=True)
     df.to_csv(save_path, index=False)

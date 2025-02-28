@@ -46,5 +46,6 @@ def train_xgboost(
     accuracy = accuracy_score(y_test, y_pred_binary)
     print(f"Accuracy: {accuracy:.4f}")
 
-    dst_path = os.path.join(dst_folder, f"xgboost_model_Accuracy_{accuracy:.4f}.model")
+    os.makedirs(dst_folder, exist_ok=True)
+    dst_path = os.path.join(dst_folder, f"xgboost_model_Accuracy_{accuracy:.4f}.json")
     model.save_model(dst_path)

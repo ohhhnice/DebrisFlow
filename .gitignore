@@ -3,3 +3,4 @@
 *.mp4
 *.csv
 __pycache__/
+*.png

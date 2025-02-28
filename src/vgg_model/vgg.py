@@ -1,16 +1,9 @@
-import sys
-from pathlib import Path
 import torch
 from torch.utils.data import DataLoader
 import torchvision.transforms as transforms
 from torchvision.transforms.transforms import Compose
 from torchvision.models.vgg import VGG
 import torchvision.models as models
-import numpy as np
-
-ROOT = Path(__file__).resolve().parents[2]
-if str(ROOT) not in sys.path:
-    sys.path.append(str(ROOT))
 
 from src.vgg_model.load_data import DebrisFlow
 

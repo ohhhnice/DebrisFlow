@@ -1,13 +1,6 @@
-import sys
 import torch
 import os
-from pathlib import Path
 from torch.utils.tensorboard import SummaryWriter
-
-ROOT = Path(__file__).resolve().parents[2]
-if str(ROOT) not in sys.path:
-    sys.path.append(str(ROOT))
-
 from src.vgg_model.vgg import *
 
 device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
@@ -38,6 +31,8 @@ def train_based_on_vgg19(
     total_train_step = 0
     total_test_step = 0
     writer = SummaryWriter(log_dir)
+
+    os.makedirs(save_pth_dir, exist_ok=True)
 
     for epoch in range(epochs):
         vgg19.train()

@@ -17,7 +17,7 @@ def parse_opt():
     parser.add_argument(
         "--csv_name",
         type=str,
-        default="3_frame050.csv",
+        default="3.csv",
         help="the name of train dataset csv",
     )
     parser.add_argument(

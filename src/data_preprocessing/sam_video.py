@@ -1,18 +1,11 @@
-import sys
 import os
 import cv2
 from tqdm import tqdm
 import numpy as np
-from pathlib import Path
-
-FILE = Path(__file__).resolve()
-ROOT = FILE.parents[2]
-if str(ROOT) not in sys.path:
-    sys.path.append(str(ROOT))
-    sys.path.append(str(ROOT / "external_project"))
 
 from src.utils.load_video import extract_frames
 from external_project.segment_anything import SamPredictor, sam_model_registry
+from src.data_preprocessing.choose_points import VideoPointSelector
 
 
 class SamVideo:
@@ -32,9 +25,9 @@ class SamVideo:
         video_name: str,
         src_folder: str,
         dst_folder: str,
-        point_coordinates: list[int],
         frame_idx: int,
         slice_windows_size: int,
+        point_coordinates: tuple[int, int] = None,
     ) -> str:
         src_path = os.path.join(src_folder, video_name)
         video_fps, video_frame_count, img_shape = extract_frames(src_path)
@@ -47,6 +40,9 @@ class SamVideo:
         base_name, ext = os.path.splitext(video_name)
         save_video_name = "{}_frame{:>03d}{}".format(base_name, frame_idx, ext)
         save_path = os.path.join(dst_folder, save_video_name)
+
+        if point_coordinates is None:
+            point_coordinates = VideoPointSelector(src_path).get_selected_point()
 
         cap = cv2.VideoCapture(src_path)
         cap.set(cv2.CAP_PROP_POS_FRAMES, start_idx)
@@ -71,8 +67,8 @@ class SamVideo:
         video_name: str,
         src_folder: str,
         dst_folder: str,
-        point_coordinates: list[int],
         extract_freq: int = 1,
+        point_coordinates: tuple[int, int] = None,
     ) -> str:
         os.makedirs(dst_folder, exist_ok=True)
         src_path = os.path.join(src_folder, video_name)
@@ -83,15 +79,18 @@ class SamVideo:
         fourcc = cv2.VideoWriter.fourcc(*"mp4v")
         out = cv2.VideoWriter(save_path, fourcc, video_fps, img_shape)
 
+        if point_coordinates is None:
+            point_coordinates = VideoPointSelector(src_path).get_selected_point()
+
         print("=" * 30 + " SAM VIDEO " + "=" * 30 + "\n")
         for frameIdx in tqdm(
             range(video_frame_count), desc="Writing frames(SAM)", unit="frame"
         ):
-            if frameIdx % extract_freq != 0:
-                continue
             ret, frame = cap.read()
             if not ret:
                 break
+            if frameIdx % extract_freq != 0:
+                continue
             output_frame = self._get_masked_photo(frame, point_coordinates)
             out.write(output_frame)
         out.release()

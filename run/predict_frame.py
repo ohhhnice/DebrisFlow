@@ -1,5 +1,7 @@
 import sys
 from pathlib import Path
+from argparse import ArgumentParser
+import torch
 
 FILE = Path(__file__).resolve()
 ROOT = FILE.parents[1]
@@ -7,11 +9,11 @@ if str(ROOT) not in sys.path:
     sys.path.append(str(ROOT))
 sys.path.append(str(ROOT / "external_project"))
 
-from argparse import ArgumentParser
-from run.predict import DebrisFlowPredict
+from src.workflow.predict import DebrisFlowPredict
 
 
 def parse_opt():
+    device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
     parser = ArgumentParser()
     parser.add_argument("--video_name", type=str, default="3.mp4", help="video name")
     parser.add_argument(
@@ -41,13 +43,13 @@ def parse_opt():
     parser.add_argument(
         "--slice_windows_size",
         type=int,
-        default=30,
+        default=10,
         help="The size for slice windows to extract features",
     )
     parser.add_argument(
         "--XGB_model_path",
         type=str,
-        default=None,
+        default="models/trained/XGBoost/xgboost_model_Accuracy_0.8889.json",
         help="The trained XGBoost model path",
     )
     parser.add_argument(
@@ -64,6 +66,17 @@ def parse_opt():
         help="The frequency to extract frames",
     )
     parser.add_argument(
+        "--vgg_model_weights_path",
+        type=str,
+        default="models/trained/vgg/vgg19_epoch9_accuracy1.0_loss0.0.pth",
+        help="vgg model weights path",
+    )
+    parser.add_argument(
+        "--feature_size", type=int, default=200, help="the number of the features"
+    )
+    parser.add_argument("--device", type=str, default=device)
+
+    parser.add_argument(
         "--sam_model_type",
         type=str,
         default="vit_h",
@@ -72,7 +85,7 @@ def parse_opt():
     parser.add_argument(
         "--sam_model_device",
         type=str,
-        default="cpu",
+        default=device,
         help="The device for SAM model (cpu, cuda)",
     )
     parser.add_argument(
@@ -88,4 +101,4 @@ def parse_opt():
 if __name__ == "__main__":
     opt = parse_opt()
     DebrisFlow = DebrisFlowPredict(**vars(opt))
-    DebrisFlow.predict_video()
+    DebrisFlow.predict_frame(50)
