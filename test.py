@@ -1,6 +1,5 @@
-from src.data_preprocessing.choose_points import VideoPointSelector
+from src.utils.load_video import extract_frames
 
-video_path = "data/sam/raw/3.mp4"  # 替换为你的视频路径
-selector = VideoPointSelector(video_path)
-point = selector.get_selected_point()
-print(f"Final selected point: {point}")
+video_path = "data/dataset/samed_video/田家沟_20230718T173504Z_20230718T174350Z_FrameIdx300_SliceWindowsSize10_ExtractFreq_2_val_1.mp4"  # 替换为你的视频路径
+fps, frameCount, frame_shape = extract_frames(video_path)
+print(fps, frameCount, frame_shape)
