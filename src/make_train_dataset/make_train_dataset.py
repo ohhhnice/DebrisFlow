@@ -3,6 +3,7 @@ import os
 from src.data_preprocessing.sam_video import SamVideo
 from src.utils.load_video import extract_frames
 from src.data_preprocessing.choose_points import VideoPointSelector
+from PIL import Image
 
 
 class MakeDataSet:
@@ -20,6 +21,9 @@ class MakeDataSet:
             model_device=kwargs["sam_model_device"],
             checkpoint=kwargs["sam_checkpoint"],
         )
+        self.slice_windows_size = 75
+        self.extract_freq = 1
+        self.point_coordinates = None
 
     def make_dataset(self):
         while True:
@@ -31,6 +35,7 @@ class MakeDataSet:
                 is_debrisflow,
                 data_type,
             )
+            self.point_coordinates = None
 
     def make_dataset_from_video(
         self,
@@ -73,6 +78,7 @@ class MakeDataSet:
         video_file_path = input("请输入视频文件路径（终止程序输入stop）：")
         if video_file_path == "stop":
             return None, None, None, False
+        extract_frames(video_file_path, True)
         is_debrisflow = int(
             input("请输入你想提取泥石流还是非泥石流（1: 泥石流 / 0: 非泥石流）：")
         )
@@ -131,10 +137,22 @@ class MakeDataSet:
             if flag == "n":
                 return None, None, None, False
             frame_idx = int(input("请输入的 frame_idx: "))
-            slice_windows_size = int(
-                input("请输入 slice_windows_size (不改变直接回车): ")
+            slice_windows_size = input(
+                f"请输入 slice_windows_size (不改变直接回车，默认值为{self.slice_windows_size}): "
             )
-            extract_freq = int(input("请输入 extract_freq (不改变直接回车): "))
+
+            if slice_windows_size == "":
+                slice_windows_size = self.slice_windows_size
+            else:
+                slice_windows_size = int(slice_windows_size)
+            extract_freq = input(
+                f"请输入 extract_freq (不改变直接回车，默认值为{self.extract_freq}): "
+            )
+
+            if extract_freq == "":
+                extract_freq = self.extract_freq
+            else:
+                extract_freq = int(extract_freq)
             print(
                 f"参数：frame_idx={frame_idx}, slice_windows_size={slice_windows_size}, extract_freq={extract_freq}"
             )
@@ -215,7 +233,11 @@ class MakeDataSet:
         save_file_path: str,
         extract_freq: int,
     ):
-        point_coordinates = VideoPointSelector(src_video_path).get_selected_point()
+        if self.point_coordinates is None:
+            self.point_coordinates = VideoPointSelector(
+                src_video_path
+            ).get_selected_point()
+        point_coordinates = self.point_coordinates
         self.sam.predict_video(
             os.path.basename(src_video_path),
             os.path.dirname(src_video_path),
@@ -233,5 +255,6 @@ class MakeDataSet:
             return
         save_dir = os.path.dirname(save_file_path)
         os.makedirs(save_dir, exist_ok=True)
-        cv2.imwrite(save_file_path, frame)
+        image = Image.fromarray(cv2.cvtColor(frame, cv2.COLOR_BGR2RGB))
+        image.save(save_file_path)
         cap.release()
