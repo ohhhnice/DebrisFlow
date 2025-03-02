@@ -530,7 +530,7 @@ const app = createApp({
                             <el-input v-model="formData.save_folder" placeholder="请输入保存文件夹路径"></el-input>
                         </el-form-item>
                         
-                        <el-form-item label="是否为切片流" prop="is_debrisflow">
+                        <el-form-item label="是否为泥石流" prop="is_debrisflow">
                             <el-radio-group v-model="formData.is_debrisflow">
                                 <el-radio :label="true">是</el-radio>
                                 <el-radio :label="false">否</el-radio>
