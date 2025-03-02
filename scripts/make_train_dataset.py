@@ -11,43 +11,18 @@ sys.path.append(str(ROOT / "external_project"))
 from src.make_train_dataset.make_train_dataset import MakeDataSet
 
 
-def parse_opt():
-    parser = ArgumentParser()
-    parser.add_argument(
-        "--save_folder",
-        type=str,
-        default="data/dataset",
-        help="the folder for saving the dataset",
-    )
-    parser.add_argument(
-        "--show_photo",
-        type=bool,
-        default=True,
-        help="whether to show the photo",
-    )
-    parser.add_argument(
-        "--sam_model_type",
-        type=str,
-        default="vit_h",
-        help="the type of the SAM model",
-    )
-    parser.add_argument(
-        "--sam_model_device",
-        type=str,
-        default="cuda",
-        help="the device of the SAM model",
-    )
-    parser.add_argument(
-        "--sam_checkpoint",
-        type=str,
-        default="models\pretrained\sam\sam_vit_h_4b8939.pth",
-        help="the checkpoint of the SAM model",
-    )
-    args = parser.parse_args()
-    return args
-
-
-if __name__ == "__main__":
-    opts = parse_opt()
-    data = MakeDataSet(**vars(opts))
-    data.make_dataset()
+quick_dataset = MakeDataSet(
+    save_folder="data/dataset",
+    video_file_path="data/sam/raw/田家沟_20230718T173504Z_20230718T174350Z.mp4",
+    is_debrisflow=True,
+    data_type="train",
+    frame_idx=10000,
+    slice_windows_size=10,
+    extract_freq=1,
+    point_coordinates=[800, 700],
+    sam_video_sign=True,
+    sam_model_type="vit_h",
+    sam_model_device="cpu",
+    sam_checkpoint="models/pretrained/sam/sam_vit_h_4b8939.pth",
+)
+quick_dataset.make_dataset()
