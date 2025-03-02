@@ -172,6 +172,7 @@ class MakeDataSet:
         extract_freq: int,
         start_frame_idx: int,
     ):
+        is_debrisflow = int(is_debrisflow)
         base_name = os.path.splitext(os.path.basename(video_file_path))[0]
         saved_base_name = f"{base_name}_FrameIdx{frame_idx}_SliceWindowsSize{slice_windows_size}_ExtractFreq_{extract_freq}_{data_type}_{is_debrisflow}"
         raw_video_file_path = os.path.join(

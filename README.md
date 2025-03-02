@@ -1,3 +1,5 @@
+<!-- @format -->
+
 # 项目框架
 
 ```
@@ -62,3 +64,6 @@ Click the links below to download the checkpoint for the corresponding model typ
 - `vit_b`: [ViT-B SAM model.](https://dl.fbaipublicfiles.com/segment_anything/sam_vit_b_01ec64.pth)
 
 将文件放到 ./models/pretrained/sam/ 路径下（需要手动创建）
+
+python -m uvicorn web.main:app --reload --host 127.0.0.1 --port 8000
+http://localhost:8000/
