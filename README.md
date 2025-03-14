@@ -67,3 +67,5 @@ Click the links below to download the checkpoint for the corresponding model typ
 
 python -m uvicorn web.main:app --reload --host 127.0.0.1 --port 8000
 http://localhost:8000/
+
+python run/run_web_app.py
