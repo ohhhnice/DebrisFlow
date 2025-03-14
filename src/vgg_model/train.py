@@ -25,7 +25,8 @@ def train_based_on_vgg19(
     )
     vgg19 = load_vgg_model(model_weights_path, feature_size, class_size, device)
 
-    optimizer = torch.optim.Adam(vgg19.parameters(), lr=lr)
+    # optimizer = torch.optim.Adam(vgg19.parameters(), lr=lr)
+    optimizer = torch.optim.SGD(vgg19.parameters(), lr=lr)
     criterion = torch.nn.CrossEntropyLoss().to(device)
 
     total_train_step = 0
