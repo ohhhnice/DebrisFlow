@@ -1,0 +1,8 @@
+.venv/
+*.pth
+*.mp4
+*.csv
+__pycache__/
+*.png
+*.model
+article_source/
