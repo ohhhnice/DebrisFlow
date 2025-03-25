@@ -33,9 +33,12 @@ def load_vgg_model(
 ) -> VGG:
     """用于训练"""
     vgg19 = models.vgg19(pretrained=False).to(device)
-    vgg19.load_state_dict(torch.load(model_weights_path))
-    vgg19.classifier[3] = torch.nn.Linear(4096, feature_size).to(device)
-    vgg19.classifier[6] = torch.nn.Linear(feature_size, class_size).to(device)
+    
+    # vgg19.load_state_dict(torch.load(model_weights_path))
+    vgg19.classifier[6] = torch.nn.Linear(4096, feature_size).to(device)
+    vgg19.classifier.append(torch.nn.ReLU(True).to(device))
+    vgg19.classifier.append(torch.nn.Dropout(p=0.5).to(device))
+    vgg19.classifier.append(torch.nn.Linear(feature_size, class_size).to(device))
 
     total = sum(p.numel() for p in vgg19.parameters())
     print("Number of parameters: %.2fM" % (total / 1e6))

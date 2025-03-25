@@ -10,7 +10,6 @@ import uvicorn
 import shutil
 import torch
 import cv2
-
 from fastapi.websockets import WebSocket
 
 FILE = Path(__file__).resolve()
@@ -18,7 +17,6 @@ ROOT = FILE.parents[3]  # 项目根目录
 if str(ROOT) not in sys.path:
     sys.path.append(str(ROOT))
 sys.path.append(str(ROOT / "external_project"))
-
 
 from src.utils.load_video import extract_frames
 from src.utils.frame_processor import FrameProcessor
