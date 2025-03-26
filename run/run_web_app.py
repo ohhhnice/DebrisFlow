@@ -30,6 +30,7 @@ def run_backend():
         stderr=subprocess.STDOUT,
         text=True,
         bufsize=1,
+        encoding="utf-8",
     )
 
     for line in backend_process.stdout:
@@ -53,6 +54,7 @@ def run_frontend():
         stderr=subprocess.STDOUT,
         text=True,
         bufsize=1,
+        encoding="utf-8",
     )
 
     for line in frontend_process.stdout:
