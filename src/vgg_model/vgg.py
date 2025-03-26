@@ -33,6 +33,7 @@ def load_vgg_model(
 ) -> VGG:
     """用于训练"""
     vgg19 = models.vgg19(pretrained=False).to(device)
+    
     # vgg19.load_state_dict(torch.load(model_weights_path))
     vgg19.classifier[6] = torch.nn.Linear(4096, feature_size).to(device)
     vgg19.classifier.append(torch.nn.ReLU(True).to(device))

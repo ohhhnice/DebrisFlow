@@ -29,8 +29,8 @@ def parse_opt():
     parser.add_argument(
         "--point_coordinates",
         nargs="+",
-        type=int,
-        default=[800, 700],
+        type=list[list[int]],
+        default=[[800, 700]],
         help="The coordinates of the object of interest.",
     )
     parser.add_argument(

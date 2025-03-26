@@ -16,7 +16,7 @@ class MakeDataSet:
         frame_idx: int,
         slice_windows_size: int = 75,
         extract_freq: int = 1,
-        point_coordinates=None,
+        point_coordinates:list[list[int]]=None,
         sam_video_sign: bool = False,
         **kwargs,
     ):

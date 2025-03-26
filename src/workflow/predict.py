@@ -13,7 +13,7 @@ class DebrisFlowPredict:
         output_folder: str,
         slice_windows_size: int,
         XGB_model_path: str,
-        point_coordinates: list[int],
+        point_coordinates: list[list[int]],
         extract_freq: int,
         vgg_model_weights_path: str,
         feature_size: int,

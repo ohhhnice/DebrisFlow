@@ -61,7 +61,7 @@ def parse_opt():
         "--point_coordinates",
         nargs="+",
         type=int,
-        default=[800, 700],
+        default=[[800, 700]],
         help="The coordinates of the object of interest.",
     )
     parser.add_argument(

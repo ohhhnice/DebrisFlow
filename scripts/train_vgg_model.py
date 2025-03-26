@@ -15,18 +15,12 @@ def parse_opt():
     device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
     parser = ArgumentParser()
     parser.add_argument(
-        "--train_data_folder",
-        type=str,
-        default="./data/vgg/train",
-        help="train dataset root",
+        "--train_data_folder", type=str, default="./data/vgg", help="train dataset root"
     )
     parser.add_argument(
-        "--val_data_folder",
-        type=str,
-        default="./data/vgg/val",
-        help="val dataset root",
+        "--val_data_folder", type=str, default="./data/vgg", help="val dataset root"
     )
-    parser.add_argument("--batch_size", type=int, default=10, help="batch size")
+    parser.add_argument("--batch_size", type=int, default=3, help="batch size")
     parser.add_argument(
         "--model_weights_path",
         type=str,
@@ -38,11 +32,11 @@ def parse_opt():
     )
     parser.add_argument("--class_size", type=int, default=2, help="the number of class")
     parser.add_argument("--device", type=str, default=device)
-    parser.add_argument("--lr", type=float, default=0.005, help="learning rate")
+    parser.add_argument("--lr", type=float, default=0.001, help="learning rate")
     parser.add_argument(
         "--log_dir", type=str, default="src/vgg_model/logs", help="log dir"
     )
-    parser.add_argument("--epochs", type=int, default=100, help="number of epochs")
+    parser.add_argument("--epochs", type=int, default=50, help="number of epochs")
     parser.add_argument(
         "--save_pth_dir",
         type=str,

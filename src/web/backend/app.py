@@ -10,9 +10,6 @@ import uvicorn
 import shutil
 import torch
 import cv2
-from src.utils.load_video import extract_frames
-from src.utils.frame_processor import FrameProcessor
-from src.make_train_dataset.make_train_dataset import MakeDataSet
 from fastapi.websockets import WebSocket
 
 FILE = Path(__file__).resolve()
@@ -21,6 +18,8 @@ if str(ROOT) not in sys.path:
     sys.path.append(str(ROOT))
 sys.path.append(str(ROOT / "external_project"))
 
+from src.utils.load_video import extract_frames
+from src.utils.frame_processor import FrameProcessor
 from src.make_train_dataset.make_train_dataset import MakeDataSet
 
 
@@ -69,7 +68,7 @@ class MakeDatasetModel(BaseModel):
     frame_idx: int
     slice_windows_size: int = 75
     extract_freq: int = 1
-    point_coordinates: Optional[List[int]] = None
+    point_coordinates: Optional[List[List[int]]] = None
     sam_video_sign: bool = False
     sam_model_type: Optional[str] = "vit_h"
     sam_model_device: Optional[str] = None

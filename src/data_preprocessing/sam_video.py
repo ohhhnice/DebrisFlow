@@ -27,7 +27,7 @@ class SamVideo:
         dst_folder: str,
         frame_idx: int,
         slice_windows_size: int,
-        point_coordinates: tuple[int, int] = None,
+        point_coordinates: list[list[int]] = None,
     ) -> str:
         src_path = os.path.join(src_folder, video_name)
         video_fps, video_frame_count, img_shape = extract_frames(src_path)
@@ -68,7 +68,7 @@ class SamVideo:
         src_folder: str,
         dst_folder: str,
         extract_freq: int = 1,
-        point_coordinates: tuple[int, int] = None,
+        point_coordinates: list[list[int]] = None,
     ) -> str:
         os.makedirs(dst_folder, exist_ok=True)
         src_path = os.path.join(src_folder, video_name)
@@ -105,15 +105,14 @@ class SamVideo:
     def _get_masked_photo(
         self,
         image: np.ndarray,
-        point_coordinates: list[int],
+        point_coordinates: list[list[int]],
     ) -> np.array:
         self.predictor.set_image(image)
-        points = np.array([point_coordinates])  # 传设置预标记点
+        points = np.array(point_coordinates)  # 传设置预标记点
+        point_labels = np.array([1 for _ in range(len(points))])
         masks, scores, _ = self.predictor.predict(  # 使用SAM_predictor返回覆盖、置信度
             point_coords=points,
-            point_labels=np.array(
-                [1]
-            ),  # 设置label（需要预测的主体一般设置为1，背景一般设置为0）
+            point_labels=point_labels,  # 设置label（需要预测的主体一般设置为1，背景一般设置为0）
             multimask_output=True,
         )
         idx = np.argmax(scores)
