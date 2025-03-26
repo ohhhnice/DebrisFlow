@@ -1,86 +1,27 @@
-import matplotlib.pyplot as plt
-import matplotlib.patches as patches
+import math
+import torch
+from torch import nn
 
-fig, ax = plt.subplots(figsize=(10, 12))
 
-# 定义层的位置和大小
-layers = [
-    {
-        "name": "Input",
-        "type": "input",
-        "x": 0.1,
-        "y": 0.9,
-        "width": 0.2,
-        "height": 0.05,
-    },
-    {
-        "name": "Conv3-64",
-        "type": "conv",
-        "x": 0.4,
-        "y": 0.8,
-        "width": 0.2,
-        "height": 0.05,
-    },
-    {
-        "name": "MaxPool",
-        "type": "pool",
-        "x": 0.4,
-        "y": 0.7,
-        "width": 0.2,
-        "height": 0.05,
-    },
-    # 添加更多层...
-]
+class SelfAttention(nn.Module):
+    def __init__(self, emb_dim):
+        super().__init__()
+        self.q_proj = nn.Linear(emb_dim, emb_dim)
+        self.k_proj = nn.Linear(emb_dim, emb_dim)
+        self.v_proj = nn.Linear(emb_dim, emb_dim)
 
-# 绘制层
-for layer in layers:
-    if layer["type"] == "input":
-        ax.add_patch(
-            patches.Rectangle(
-                (layer["x"], layer["y"]),
-                layer["width"],
-                layer["height"],
-                edgecolor="black",
-                facecolor="lightblue",
-            )
-        )
-    elif layer["type"] == "conv":
-        ax.add_patch(
-            patches.Rectangle(
-                (layer["x"], layer["y"]),
-                layer["width"],
-                layer["height"],
-                edgecolor="black",
-                facecolor="lightgreen",
-            )
-        )
-    elif layer["type"] == "pool":
-        ax.add_patch(
-            patches.Rectangle(
-                (layer["x"], layer["y"]),
-                layer["width"],
-                layer["height"],
-                edgecolor="black",
-                facecolor="lightcoral",
-            )
-        )
-    ax.text(
-        layer["x"] + 0.05, layer["y"] + 0.025, layer["name"], fontsize=10, color="black"
-    )
+    def forward(self, X):
+        # X （batch_size, seq_len, emb_dim)
+        q = self.q_proj(X)
+        k = self.k_proj(X)
+        v = self.v_proj(X)
+        weight = torch.matmul(q, k.transpose(1, 2))
+        weight = torch.softmax(weight, dim=-1)
+        return torch.matmul(weight, v)
 
-# 连接层
-for i in range(len(layers) - 1):
-    ax.annotate(
-        "",
-        xy=(
-            layers[i]["x"] + layers[i]["width"],
-            layers[i]["y"] + layers[i]["height"] / 2,
-        ),
-        xytext=(layers[i + 1]["x"], layers[i + 1]["y"] + layers[i + 1]["height"] / 2),
-        arrowprops=dict(arrowstyle="->", lw=1.5),
-    )
 
-ax.set_xlim(0, 1)
-ax.set_ylim(0, 1)
-ax.axis("off")
-plt.show()
+X = torch.ones(2, 3, 4)
+attn = SelfAttention(4)
+res = attn(X)
+print(res)
+ 

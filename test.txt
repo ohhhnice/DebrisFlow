@@ -1,0 +1,915 @@
+@article{宋银2024,
+	author = {  宋银 and     陈亮 and     王研 and     何清 and     杨林 and     巴净慧 and 陈典},
+	title = {云南德钦县一中河泥石流成灾特征及危险性评价},
+	journal = {中国地质灾害与防治学报},
+	volume = {35},
+	number = {05},
+	pages = {103-109},
+	year = {2024},
+	issn = {1003-8035},
+	doi = {10.16031/j.cnki.issn.1003-8035.202307040}
+}    
+
+@mastersthesis{唐炜2012,
+	author = {唐炜},
+	title = {公共治理视角下的自然灾变应对研究},
+	school = {南京理工大学},
+	year = {2012}
+}    
+
+@mastersthesis{朱秀杰2014,
+	author = {朱秀杰},
+	title = {舟曲泥石流灾后中小学生创伤后应激障碍及相关因素的研究},
+	school = {兰州大学},
+	year = {2014}
+}    
+
+@article{马煜2011,
+	author = {  马煜 and     余斌 and     吴雨夫 and     张健楠 and 亓星},
+	title = {四川都江堰龙池“8·13”八一沟大型泥石流灾害研究},
+	journal = {四川大学学报(工程科学版)},
+	volume = {43},
+	number = {S1},
+	pages = {92-98},
+	year = {2011},
+	issn = {1009-3087},
+	doi = {10.15961/j.jsuese.2011.s1.005}
+}    
+
+@article{许强2017,
+	author = {  许强 and     李为乐 and     董秀军 and     肖先煊 and     范宣梅 and 裴向军},
+	title = {四川茂县叠溪镇新磨村滑坡特征与成因机制初步研究},
+	journal = {岩石力学与工程学报},
+	volume = {36},
+	number = {11},
+	pages = {2612-2628},
+	year = {2017},
+	issn = {1000-6915},
+	doi = {10.13722/j.cnki.jrme.2017.0855}
+}    
+
+@article{唐鹏2024,
+	author = {  唐鹏 and     许茹 and     胡正涛 and     杨曦璃 and     青佳明 and 邓辉},
+	title = {四川“9.5”泸定震后加郡沟流域强降雨前后泥石流物源分析},
+	journal = {山西水土保持科技},
+	volume = {},
+	number = {03},
+	pages = {39-47},
+	year = {2024},
+	issn = {1008-0120},
+}    
+
+@techreport{中国自然资源公报2024,
+	title = {2023年中国自然资源公报(摘登)},
+	institution = {中国自然资源报},
+	year = {2024-02-29}
+}    
+
+
+@article{刘珍2024,
+	author = {  刘珍 and     刘润中 and 李自强},
+	title = {滇西北自然保护区低频泥石流形成条件及活动特征},
+	journal = {地质灾害与环境保护},
+	volume = {35},
+	number = {04},
+	pages = {16-21+30},
+	year = {2024},
+	issn = {1006-4362},
+}    
+
+@article{何锋2022,
+	author = {  何锋 and 柳阳},
+	title = {香格里拉地区泥石流灾害对生命财产主要威胁因素探究},
+	journal = {农业灾害研究},
+	volume = {12},
+	number = {07},
+	pages = {160-163},
+	year = {2022},
+	issn = {2095-3305},
+}    
+
+@article{骆银辉2023,
+	author = {  骆银辉 and     蒋学广 and     孙珲 and     郑吉云 and     赵刚 and 陈允建},
+	title = {泥石流防治对策与新方法},
+	journal = {云南地质},
+	volume = {42},
+	number = {02},
+	pages = {162-167},
+	year = {2023},
+	issn = {1004-1885},
+}    
+
+
+
+
+
+
+@phdthesis{2015袁勇,
+	author = {袁勇},
+	title = {基于粗糙集理论的泥石流临界雨量研究},
+	school = {成都理工大学},
+	year = {2015}
+}    
+
+@conference{2017高宏伟,
+	author = {  高宏伟 and     贾辉 and     赖刘保 and     张辉 and 陈昌彦},
+	title = {综合物探方法在泥石流地质灾害勘查中的应用},
+	booktitle = {第十五届全国工程物探与岩土工程测试学术大会论文集},
+	year = {2017},
+	pages = {489-494},
+	publisher = {北京市勘察设计研究院有限公司;}
+}    
+
+@article{2011柏永岩,
+	author = {  柏永岩 and 彭静},
+	title = {绵竹清平文家沟泥石流监测方案设计},
+	journal = {四川地质学报},
+	volume = {31},
+	number = {S2},
+	pages = {81-85},
+	year = {2011},
+	issn = {1006-0995},
+}    
+
+@article{2024庆丰,
+	author = {  庆丰 and     赵岩 and     种艳 and     金佳成 and     陈冠 and     李亚军 and 孟兴民},
+	title = {白龙江流域泥石流爆发的时空规律与堵江灾害危险预测},
+	journal = {兰州大学学报(自然科学版)},
+	volume = {60},
+	number = {04},
+	pages = {488-493},
+	year = {2024},
+	issn = {0455-2059},
+	doi = {10.13885/j.issn.0455-2059.2024.04.009}
+}    
+
+@article{2006郭百平,
+	author = {  郭百平 and     宝力特 and     武称意 and     于亚文 and 哈斯},
+	title = {日本的泥沙灾害监测预警体系及其启示},
+	journal = {中国水土保持科学},
+	number = {03},
+	pages = {79-82},
+	year = {2006},
+	issn = {1672-3007},
+	doi = {10.16843/j.sswc.2006.03.016}
+}    
+
+
+@article{2009哲伦,
+	author = {哲伦},
+	title = {美国的泥石流预警系统},
+	journal = {资源与人居环境},
+	volume = {},
+	number = {19},
+	pages = {41-44},
+	year = {2009},
+	issn = {1672-822X},
+}    
+
+
+@mastersthesis{陈玉波2024,
+	author = {陈玉波},
+	title = {云南滇西某盆地周边地质灾害易发性评价及泥石流监测预警防控研究},
+	school = {昆明理工大学},
+	year = {2024}
+}    
+
+@article{XingzhangChen2016,
+	author = {  Xingzhang Chen and     Hui Chen and     Yong You and     Xiaoqing Chen and Jinfeng Liu},
+	title = {Weights-of-evidence method based on GIS for assessing susceptibility to debris flows in Kangding County, Sichuan Province, China},
+	journal = {Environmental Earth Sciences},
+	volume = {75},
+	number = {1},
+	year = {2016},
+	issn = {1866-6280},
+}    
+
+@article{YanyanLi2017,
+	author = {  Yanyan Li and     Honggang Wang and     Jianping Chen and Yanjun Shang},
+	title = {Debris Flow Susceptibility Assessment in the Wudongde Dam Area, China Based on Rock Engineering System and Fuzzy C-Means Algorithm},
+	journal = {Water},
+	volume = {9},
+	number = {9},
+	pages = {669-669},
+	year = {2017},
+	issn = {2073-4441},
+}    
+
+@article{POLAT2020,
+	author = {  Ali POLAT and Dursun ER?K},
+	title = {Debris flow susceptibility and propagation assessment in West Koyulhisar, Turkey},
+	journal = {Journal of Mountain Science},
+	volume = {17},
+	number = {11},
+	pages = {2611-2623},
+	year = {2020},
+	issn = {1672-6316},
+}    
+
+@article{QIAO2021,
+	author = {  QIAO Shuang-shuang and     QIN Sheng-wu and     SUN Jing-bo and     CHE Wen-chao and     YAO Jing-yu and     SU Gang and     CHEN Yang and NNANWUBA Uzodigwe Emmanuel},
+	title = {Development of a region-partitioning method for debris flow susceptibility mapping},
+	journal = {Journal of Mountain Science},
+	volume = {18},
+	number = {05},
+	pages = {1177-1191},
+	year = {2021},
+	issn = {1672-6316},
+}    
+
+@article{intarawichian2011frequency,
+	title={Frequency ratio model based landslide susceptibility mapping in lower Mae Chaem watershed, Northern Thailand},
+	author={Intarawichian, N and Dasananda, S},
+	journal={Environmental Earth Sciences},
+	volume={64},
+	pages={2271--2285},
+	year={2011},
+	publisher={Springer}
+}
+
+@article{Ayalew2004,
+	author = {  Lulseged Ayalew and Hiromitsu Yamagishi},
+	title = {The application of GIS-based logistic regression for landslide susceptibility mapping in the Kakuda-Yahiko Mountains, Central Japan},
+	journal = {Geomorphology},
+	volume = {65},
+	number = {1},
+	pages = {15-31},
+	year = {2004},
+	issn = {0169-555X},
+}    
+
+@article{kanungo2012landslide,
+	title={Landslide Susceptibility Zonation (LSZ) Mapping--A Review.},
+	author={Kanungo, DP and Arora, MK and Sarkar, Shantanu and Gupta, RP},
+	year={2012}
+}
+
+@article{aleotti1999landslide,
+	title={Landslide hazard assessment: summary review and new perspectives},
+	author={Aleotti, Pietro and Chowdhury, Robin},
+	journal={Bulletin of Engineering Geology and the environment},
+	volume={58},
+	pages={21--44},
+	year={1999},
+	publisher={Springer}
+}
+
+@article{du2019landslide,
+	title={Landslide susceptibility mapping in the region of eastern Himalayan syntaxis, Tibetan Plateau, China: a comparison between analytical hierarchy process information value and logistic regression-information value methods},
+	author={Du, Guoliang and Zhang, Yongshuang and Yang, Zhihua and Guo, Changbao and Yao, Xin and Sun, Dongyan},
+	journal={Bulletin of Engineering Geology and the Environment},
+	volume={78},
+	pages={4201--4215},
+	year={2019},
+	publisher={Springer}
+}
+
+@article{yalcin2011gis,
+	title={A GIS-based comparative study of frequency ratio, analytical hierarchy process, bivariate statistics and logistics regression methods for landslide susceptibility mapping in Trabzon, NE Turkey},
+	author={Yalcin, Ali and Reis, Sel{\c{c}}uk and Aydinoglu, AC and Yomralioglu, Tahsin},
+	journal={Catena},
+	volume={85},
+	number={3},
+	pages={274--287},
+	year={2011},
+	publisher={Elsevier}
+}
+
+@article{2009Landslide,
+	title={Landslide Susceptibility Zonation (LSZ) Mapping – A Review},
+	author={ Kanungo, D P  and  Arora, M K  and  Sarkar, S  and  Gupta, R P },
+	year={2009},
+}
+
+@article{2011Frequency,
+	title={Frequency ratio model based landslide susceptibility mapping in lower Mae Chaem watershed, Northern Thailand},
+	author={ Intarawichian, N.  and  Dasananda, S. },
+	journal={Environmental Earth Sciences},
+	volume={64},
+	number={8},
+	pages={2271-2285},
+	year={2011},
+}
+
+@article{Mar2020,
+	title={Debris flow susceptibility mapping using frequency ratio and seed cells, in a portion of a mountain international route, Dry Central Andes of Argentina},
+	author={María Yanina Esper Angillieri},
+	journal={Catena},
+	volume={189},
+	pages={104504},
+	year={2020},
+}
+
+@article{DEMIR2019104211,
+	title = {GIS-based landslide susceptibility mapping for a part of the North Anatolian Fault Zone between Reşadiye and Koyulhisar (Turkey)},
+	journal = {CATENA},
+	volume = {183},
+	pages = {104211},
+	year = {2019},
+	issn = {0341-8162},
+	doi = {https://doi.org/10.1016/j.catena.2019.104211},
+	url = {https://www.sciencedirect.com/science/article/pii/S0341816219303534},
+	author = {Gökhan Demir},
+	keywords = {Landslide susceptibility, GIS, North Anatolian Fault Zone, Index of entropy, Frequency ratio, Turkey},
+}
+
+@article{2007Landslide,
+	title={Landslide hazard mapping at Selangor, Malaysia using frequency ratio and logistic regression models},
+	author={ Lee, Saro  and  Pradhan, Biswajeet },
+	journal={Landslides},
+	volume={4},
+	number={1},
+	pages={33-41},
+	year={2007},
+}
+
+@article{2020Comparison,
+	title={Comparison of Different Machine Learning Methods for Debris Flow Susceptibility Mapping: A Case Study in the Sichuan Province, China},
+	author={ Xiong, Ke  and  Adhikari, Basanta Raj  and  Stamatopoulos, Constantine A.  and  Zhan, Yu  and  Di, Baofeng },
+	journal={Remote Sensing},
+	volume={12},
+	number={2},
+	year={2020},
+}
+
+@article{2019Dou,
+	title={A Method for Improving Controlling Factors Based on Information Fusion for Debris Flow Susceptibility Mapping: A Case Study in Jilin Province, China.},
+	author={ Dou, Qiang  and  Qin, Shengwu  and  Zhang, Yichen  and  Ma, Zhongjun  and  Chen, Junjun  and  Qiao, Shuangshuang  and  Hu, Xiuyu  and  Liu, Fei },
+	journal={Entropy},
+	number={7},
+	year={2019},
+}
+
+@article{2018Novel,
+	title={Novel hybrid artificial intelligence approach of bivariate statistical-methods-based kernel logistic regression classifier for landslide susceptibility modeling},
+	author={ Chen, Wei  and  Shahabi, Himan  and  Shirzadi, Ataollah  and  Hong, Haoyuan  and  Akgun, Aykut  and  Tian, Yingying  and  Liu, Junzhi  and  Zhu, A Xing  and  Li, Shaojun },
+	journal={Bulletin of Engineering Geology and the Environment},
+	volume={78},
+	number={6},
+	pages={1-23},
+	year={2018},
+}
+
+@article{2014Assessing,
+	title={Assessing landslide susceptibility using Bayesian probability-based weight of evidence model},
+	author={ Sujatha, Evangelin Ramani  and  Kumaravel, P.  and  Rajamanickam, G. Victor },
+	journal={Bulletin of Engineering Geology \& the Environment},
+	volume={73},
+	number={1},
+	pages={147-161},
+	year={2014},
+}
+
+@article{2016Landslide,
+	title={Landslide susceptibility maps using different probabilistic and bivariate statistical models and comparison of their performance at Wadi Itwad Basin, Asir Region, Saudi Arabia},
+	author={ Youssef, Ahmed Mohamed  and  Pourghasemi, Hamid Reza  and  El-Haddad, Bosy A.  and  Dhahry, Basem K. },
+	journal={Bulletin of Engineering Geology \& the Environment},
+	volume={75},
+	number={1},
+	pages={63-87},
+	year={2016},
+}
+
+@article{2021Landslide,
+	title={Landslide susceptibility mapping using statistical methods in Uatzau catchment area, northwestern Ethiopia},
+	author={ Wubalem, Azemeraw },
+	journal={Geoenvironmental Disasters},
+	volume={8},
+	number={1},
+	year={2021},
+}
+
+@article{2015GIS,
+	title={GIS-based assessment of landslide susceptibility using certainty factor and index of entropy models for the Qianyang County of Baoji city, China},
+	author={ Wang, Qiqing  and  Li, Wenping  and  Chen, Wei  and  Bai, Hanying },
+	journal={Journal of Earth System Science},
+	volume={124},
+	number={7},
+	pages={1399-1415},
+	year={2015},
+}
+
+@article{2011Combining,
+	title={Combining neural network with fuzzy, certainty factor and likelihood ratio concepts for spatial prediction of landslides},
+	author={ Kanungo, D. P.  and  Sarkar, S.  and  Sharma, Shaifaly },
+	journal={Natural Hazards},
+	volume={59},
+	number={3},
+	pages={1491},
+	year={2011},
+}
+
+@article{Comparison2021,
+	title={Comparison of different sampling strategies for debris flow susceptibility mapping: A case study using the centroids of the scarp area, flowing area and accumulation area of debris flow watersheds},
+	author={ Rui-Yuan, Gao  and  Chang-Ming, Wang  and  Zhu, Liang },
+	journal={山地科学学报:英文版},
+	volume={18},
+	number={6},
+	pages={13},
+	year={2021},
+}
+
+@article{Chen2020,
+	AUTHOR = {Chen, Yang and Qin, Shengwu and Qiao, Shuangshuang and Dou, Qiang and Che, Wenchao and Su, Gang and Yao, Jingyu and Nnanwuba, Uzodigwe Emmanuel},
+	TITLE = {Spatial Predictions of Debris Flow Susceptibility Mapping Using Convolutional Neural Networks in Jilin Province, China},
+	JOURNAL = {Water},
+	VOLUME = {12},
+	YEAR = {2020},
+	NUMBER = {8},
+	ARTICLE-NUMBER = {2079},
+	URL = {https://www.mdpi.com/2073-4441/12/8/2079},
+	ISSN = {2073-4441},
+	DOI = {10.3390/w12082079}
+}
+
+@article{2015Elkadiri,
+	title={A Remote Sensing-Based Approach for Debris-Flow Susceptibility Assessment Using Artificial Neural Networks and Logistic Regression Modeling},
+	author={ Elkadiri, R  and  Sultan, M  and  Youssef, A. M  and  Elbayoumi, T  and  Chase, R  and  Bulkhi, A. B  and  Al-Katheeri, M. M },
+	journal={IEEE Journal of Selected Topics in Applied Earth Observations \& Remote Sensing},
+	volume={7},
+	number={12},
+	pages={4818-4835},
+	year={2015},
+}
+
+@article{2019Zhang,
+	title={Debris Flow Susceptibility Mapping Using Machine-Learning Techniques in Shigatse Area, China},
+	author={ Zhang, Yonghong  and  Ge, Taotao  and  Tian, Wei  and  Liou, Yuei An },
+	journal={Remote Sensing},
+	volume={11},
+	number={23},
+	pages={2801},
+	year={2019},
+}
+
+@article{2021Arabameri,
+	title={Decision Tree based ensemble machine learning approaches for landslide susceptibility mapping},
+	author={ Arabameri, Alireza  and  Pal, Subodh Chandra  and  Rezaie, Fatemeh  and  Chakrabortty, Rabin  and  Ngo, Phuong Thao Thi },
+	journal={Geocarto International},
+	number={3},
+	pages={1-28},
+	year={2021},
+}
+
+@article{2020Qing,
+	title={Application of Machine Learning to Debris Flow Susceptibility Mapping along the China-Pakistan Karakoram Highway},
+	author={ Qing, Feng  and  Zhao, Yan  and  Meng, Xingmin  and  Su, Xiaojun  and  Yue, Dongxia },
+	journal={Remote Sensing},
+	volume={12},
+	number={18},
+	pages={2933},
+	year={2020},
+}
+
+@article{2017Chen,
+	title={GIS-based landslide susceptibility modelling: a comparative assessment of kernel logistic regression, Nave-Bayes tree, and alternating decision tree models},
+	author={ Chen, Wei  and  Xie, Xiaoshen  and  Peng, Jianbing  and  Wang, Jiale  and  Duan, Zhao  and  Hong, Haoyuan },
+	journal={Geomatics Natural Hazards \& Risk},
+	pages={1-24},
+	year={2017},
+}
+
+@article{2013Xu,
+	title={Debris flow susceptibility assessment by GIS and information value model in a large-scale region, Sichuan Province (China)},
+	author={ Xu, Wenbo  and  Yu, Wenjuan  and  Jing, Shaocai  and  Zhang, Guoping  and  Huang, Jianxi },
+	journal={Natural Hazards},
+	volume={65},
+	number={3},
+	pages={1379-1392},
+	year={2013},
+}
+
+@article{2017Sujatha,
+	title={Mapping debris flow susceptibility using analytical network process in Kodaikkanal Hills, Tamil Nadu (India)},
+	author={ Sujatha, Evangelin Ramani  and  Sridhar, Venkataramana },
+	journal={Journal of Earth System Science},
+	volume={126},
+	number={8},
+	pages={116},
+	year={2017},
+}
+
+@article{Achour2018GISbasedSP,
+	title={GIS-based spatial prediction of debris flows using logistic regression and frequency ratio models for Z{\^e}zere River basin and its surrounding area, Northwest Covilh{\~a}, Portugal},
+	author={Yacine Achour and S{\'o}nia Garcia and Victor Cavaleiro},
+	journal={Arabian Journal of Geosciences},
+	year={2018},
+	volume={11},
+	pages={1-17},
+	url={https://api.semanticscholar.org/CorpusID:134084946}
+}
+
+@article{2019Landslide,
+	title={Landslide susceptibility assessment by TRIGRS in a frequently affected shallow instability area},
+	author={ Ciurleo, Mariantonietta  and  Mandaglio, Maria Clorinda  and  Moraci, Nicola },
+	journal={Springer Berlin Heidelberg},
+	number={1},
+	year={2019},
+}
+
+@article{2016Coupled,
+	title={Coupled model for simulation of landslides and debris flows at local scale},
+	author={ Park, D. W.  and  Lee, S. R.  and  Vasu, N. N.  and  Kang, S. H.  and  Park, J. Y. },
+	journal={Natural Hazards},
+	volume={81},
+	number={3},
+	pages={1653-1682},
+	year={2016},
+}
+
+@article{2010Blahut,
+	title={Analysis of landslide inventories for accurate prediction of debris-flow source areas},
+	author={ Blahut, Jan  and  Westen, Cees J. Van  and  Sterlacchini, Simone },
+	journal={Geomorphology},
+	volume={119},
+	number={1-2},
+	pages={36-51},
+	year={2010},
+}
+
+@article{Kang2018Debris,
+	title={Debris flow susceptibility assessment based on an empirical approach in the central region of South Korea},
+	author={Kang and Sinhang and Lee and Seung-Rae},
+	journal={Geomorphology Amsterdam},
+	year={2018},
+}
+
+@article{1992Hammond,
+	title={Landslide hazard assessment using Monte Carlo Simulation},
+	author={ Hammond, C. J.  and  Prellwitz, R. W.  and  Miller, S. M.  and  Bell, D. },
+	year={1992},
+}
+
+@article{1995Shaw,
+	title={Slope morphology model derived from digital elevation data},
+	author={ Shaw, Susan C.  and  Johnson, David H. },
+	year={1995},
+}
+
+@article{2000Ewen,
+	author = {  John Ewen and     Geoff Parkin and Patrick Enda O'Connell},
+	title = {SHETRAN: Distributed River Basin Flow and Transport Modeling System},
+	journal = {Journal of Hydrologic Engineering},
+	volume = {5},
+	number = {3},
+	pages = {250-258},
+	year = {2000},
+	issn = {1084-0699},
+}    
+
+@article{Pack2001Assessing,
+	title={Assessing Terrain Stability in a GIS using SINMAP},
+	author={Pack, R.  T and D.  G. Tarboton and C.  N. Goodwin},
+	year={2001},
+}
+
+@article{Dietrich1993Analysis,
+	title={Analysis of Erosion Thresholds, Channel Networks, and Landscape Morphology Using a Digital Terrain Model},
+	author={ Dietrich, William E.  and  Wilson, Cathy J.  and  Montgomery, David R.  and  Mckean, James },
+	journal={Journal of Geology},
+	volume={101},
+	number={2},
+	pages={259-278},
+	year={1993},
+}
+
+@article{Baum2002Trigr,
+	title={Trigr-A Fortran program for transient rainfall infiltration and grid-based regional slope-stability analysis},
+	author={ Baum, Rex L.  and  Savage, William Z.  and  Godt, Jonathan W. },
+	journal={Open-File Report},
+	year={2002},
+}
+
+@article{Qiao2019Application,
+	author = {  Shuangshuang Qiao and     Shengwu Qin and     Junjun Chen and     Xiuyu Hu and Zhongjun Ma},
+	title = {The Application of a Three-Dimensional Deterministic Model in the Study of Debris Flow Prediction Based on the Rainfall-Unstable Soil Coupling Mechanism},
+	journal = {Processes},
+	volume = {7},
+	number = {2},
+	pages = {99},
+	year = {2019},
+	issn = {2227-9717},
+}    
+
+@article{Zhang2014Model,
+	author = {  Shaojie Zhang and     Hongjuan Yang and     Fangqiang Wei and     Yuhong Jiang and Dunlong Liu},
+	title = {A model of debris flow forecast based on the water-soil coupling mechanism},
+	journal = {Journal of Earth Science},
+	volume = {25},
+	number = {4},
+	pages = {757-763},
+	year = {2014},
+	issn = {1674-487X},
+}    
+
+
+@article{Yang2019LocalscaleLS,
+	title={Local-scale landslide susceptibility mapping using the B-GeoSVC model},
+	author={Yang Yang and Jintao Yang and Chengdong Xu and Chong Xu and Chao Song},
+	journal={Landslides},
+	year={2019},
+	volume={16},
+	pages={1301-1312},
+	url={https://api.semanticscholar.org/CorpusID:146250368}
+}
+
+@mastersthesis{2019何静,
+	author = {何静},
+	title = {日喀则地区滑坡泥石流孕灾环境遥感监测研究},
+	school = {南京信息工程大学},
+	year = {2019}
+}    
+
+@article{2024张蓝兮,
+	author = {  张蓝兮 and     鲁军景 and 彭纪超},
+	title = {基于地理信息系统（GIS）的地质灾害评价现状},
+	journal = {中国矿业},
+	volume = {33},
+	number = {S1},
+	pages = {223-229},
+	year = {2024},
+	issn = {1004-4051},
+}    
+
+
+@phdthesis{2018向明顺,
+	author = {向明顺},
+	title = {地震重灾区生态环境遥感动态监测与评价研究},
+	school = {成都理工大学},
+	year = {2018}
+}    
+
+@article{2011AtanuSustainability,
+	title={Sustainability of Current Agriculture Practices, Community Perception, and Implications for Ecosystem Health: An Indian Study},
+	author={Atanu Sarkar and Shantagouda G. Patil and L. B. Hugar and Gary W. Vanloon},
+	journal={EcoHealth},
+	year={2011},
+	volume={8},
+	pages={418-431},
+	url={https://api.semanticscholar.org/CorpusID:20601764}
+}
+
+@article{1998Hill,
+	title = {Monitoring 20 years of increased grazing impact on the Greek island of Crete with earth observation satellites},
+	journal = {Journal of Arid Environments},
+	volume = {39},
+	number = {2},
+	pages = {165-178},
+	year = {1998},
+	issn = {0140-1963},
+	doi = {https://doi.org/10.1006/jare.1998.0392},
+	url = {https://www.sciencedirect.com/science/article/pii/S0140196398903925},
+	author = {J. Hill and P. Hostert and G. Tsiourlis and P. Kasapidis and Th. Udelhoven and C. Diemer},
+	keywords = {remote sensing, monitoring, land degradation, desertification, grazing, Greece, Crete, Mediterranean ecosystems},
+}
+
+	@article{2000Reid,
+	title={Land-use and land-cover dynamics in response to changes in climatic, biological and socio-political forces: the case of southwestern Ethiopia},
+	author={ Reid, Robin S.  and  Kruska, Russell L.  and  Muthui, Nyawira  and  Taye, Andualem  and  Wotton, Sara  and  Wilson, Cathleen J.  and  Mulatu, Woudyalew },
+	journal={Landscape Ecology},
+	volume={15},
+	number={4},
+	pages={339-355},
+	year={2000},
+}
+
+@article{2011Kavzoglu,
+	title={Assessment of environmental change and land degradation using time series of remote sensing images},
+	author={ Kavzoglu, Taskin  and  Colkesen, Ismail },
+	journal={Fresenius Environmental Bulletin},
+	volume={20},
+	number={1a},
+	pages={274-281},
+	year={2011},
+}
+
+@article{2015Willis,
+	title={Remote sensing change detection for ecological monitoring in United States protected areas},
+	author={ Willis, Katherine S. },
+	journal={Biological Conservation},
+	volume={182},
+	pages={233-242},
+	year={2015},
+}
+
+@article{2016Rodriguez,
+	title={Food, water, and fault lines: Remote sensing opportunities for earthquake-response management of agricultural water},
+	author={ Rodriguez, Jenna  and  Ustin, Susan  and  Sandoval-Solis, Samuel  and  O'Geen, Anthony Toby },
+	journal={Science of the Total Environment},
+	volume={565},
+	number={sep.15},
+	pages={1020-1027},
+	year={2016},
+}
+
+@mastersthesis{2017郑翔宇,
+	author = {郑翔宇},
+	title = {基于多源数据的黄海绿潮遥感监测研究},
+	school = {中国科学院烟台海岸带研究所},
+	year = {2017}
+}    
+
+@mastersthesis {2017杜敬,
+	author = { 杜敬 },
+	title = {基于深度学习的湖泊湿地信息提取及时空演变特征研究},
+	school = {东华理工大学},
+	year = {2017}
+}
+
+@mastersthesis{2016黄瑞,
+	author = {黄端},
+	title = {新疆伊犁河谷多源遥感影像地质灾害动态监测研究},
+	school = {江西理工大学},
+	year = {2016}
+}    
+
+@article{2016王福涛,
+	author = {  王福涛 and     王世新 and     周艺 and     王丽涛 and     阎福礼 and     李文俊 and 刘雄飞},
+	title = {高分辨率多光谱的芦山地震次生地质灾害遥感监测与评估},
+	journal = {光谱学与光谱分析},
+	volume = {36},
+	number = {01},
+	pages = {181-185},
+	year = {2016},
+	issn = {1000-0593},
+}    
+
+@article{2014王骏,
+	author = {  王骏 and     丁明涛 and     庙成 and     周鹏 and 黄英},
+	title = {基于GIS和AHP的芦山地震灾区泥石流危险性评价},
+	journal = {长江流域资源与环境},
+	volume = {23},
+	number = {11},
+	pages = {1580-1587},
+	year = {2014},
+	issn = {1004-8227},
+}    
+
+@article{2019张书豪,
+	author = {  张书豪 and 吴光},
+	title = {随机森林与GIS的泥石流易发性及可靠性},
+	journal = {地球科学},
+	volume = {44},
+	number = {09},
+	pages = {3115-3134},
+	year = {2019},
+	issn = {1000-2383},
+}    
+
+@article{2022王振华,
+	author = {  王振华 and     李静 and     张鑫月 and     郑宗生 and     卢鹏 and 栾奎峰},
+	title = {面向视频数据的深度学习目标识别算法综述},
+	journal = {计算机工程},
+	volume = {48},
+	number = {04},
+	pages = {1-15},
+	year = {2022},
+	issn = {1000-3428},
+	doi = {10.19678/j.issn.1000-3428.0062227}
+}    
+
+
+@article{2000Toshihiko,
+	author = {  Toshihiko KOYAMA and     Hiroyuki INABA and     Yasumasa ITAKURA and Masao KASAHARA},
+	title = {Detection of Debris Flow Based on MPEG Video},
+	journal = {Transactions of the Society of Instrument and Control Engineers},
+	volume = {36},
+	number = {11},
+	pages = {1047-1049},
+	year = {2000},
+	issn = {1883-8189},
+}    
+
+@article{2008Thomas,
+	author = {Thomas K. Collins},
+	title = {Debris flows caused by failure of fill slopes: early detection, warning, and loss prevention},
+	journal = {Landslides},
+	volume = {5},
+	number = {1},
+	pages = {107-120},
+	year = {2008},
+	issn = {1612-510X},
+}    
+
+@article{2018Theule,
+	author = {  Theule Joshua I. and     Crema Stefano and     Marchi Lorenzo and     Cavalli Marco and Comiti Francesco},
+	title = {Exploiting LSPIV to assess debris-flow velocities in the field},
+	journal = {Natural Hazards and Earth System Sciences},
+	volume = {18},
+	number = {1},
+	pages = {1-13},
+	year = {2018},
+}    
+
+@article{2022邓方雄,
+	author = {  邓方雄 and     卿启维 and 侯坤},
+	title = {基于视频图像识别的地质灾害监测预警系统设计},
+	journal = {电子技术与软件工程},
+	volume = {},
+	number = {02},
+	pages = {181-184},
+	year = {2022},
+	issn = {2095-5650},
+	doi = {10.20109/j.cnki.etse.2022.02.043}
+}    
+
+@article{2025王启浩,
+	author = {  王启浩 and     吕亚斌 and 张德栋},
+	title = {甘肃省白龙江流域泥沙时空变化特征及演变趋势研究},
+	journal = {江西水利科技},
+	volume = {51},
+	number = {01},
+	pages = {32-37},
+	year = {2025},
+	issn = {1004-4701},
+}    
+
+   
+@book{2013杨有成,
+	author = {  杨成有 and 刘进琪},
+	title = {甘肃江河地理名录},
+	publisher = {甘肃人民出版社},
+	year = {2013}
+}    
+
+@phdthesis{2024杨云鹏,
+	author = {杨云鹏},
+	title = {基于地震动监测的溃决型泥石流动力机制与早期预警研究},
+	school = {兰州大学},
+	year = {2024}
+}    
+
+@mastersthesis{2023林临心,
+	author = {林临心},
+	title = {白龙江易灾流域滑坡时空演化及其对泥石流活动的影响},
+	school = {兰州大学},
+	year = {2023}
+}    
+
+@article{2018李淑松,
+	author = {  李淑松 and     邹强 and     陈容 and 唐建喜},
+	title = {白龙江流域泥石流危险性评价},
+	journal = {中国水土保持科学},
+	volume = {16},
+	number = {04},
+	pages = {83-88},
+	year = {2018},
+	issn = {2096-2673},
+	doi = {10.16843/j.sswc.2018.04.011}
+}    
+
+@article{赵学宏2015泥石流灾害国内外研究动态评述,
+	title={泥石流灾害国内外研究动态评述 Review on International Research Dynamic of Debris Flows Disaster},
+	author={赵学宏 and 陈志 and 沈发兴},
+	journal={Open Journal of Nature Science},
+	volume={03},
+	pages={225-231},
+	year={2015},
+}
+
+@mastersthesis{2022李晨,
+	author = {李晨},
+	title = {白龙江流域溃决型泥石流形成过程、主控因素及临界条件研究},
+	school = {兰州大学},
+	year = {2022}
+}    
+
+@techreport{2021颉满斌,
+	author = {  颉满斌 and 法伊莎},
+	title = {风险评估与综合防灾并行  精准狙击泥石流},
+	institution = {科技日报},
+	year = {2021-12-16}
+}    
+
+@article{2017谢余初粮食,
+	author = {  谢余初 and     巩杰 and     齐姗姗 and     张影 and 郭建军},
+	title = {甘肃白龙江流域生态系统粮食生产服务价值时空分异},
+	journal = {生态学报},
+	volume = {37},
+	number = {05},
+	pages = {1719-1728},
+	year = {2017},
+	issn = {1000-0933},
+}    
+
+@article{2017谢余初生态,
+	author = {  谢余初 and     巩杰 and     齐姗姗 and     胡宝清 and 王克林},
+	title = {基于综合指数法的白龙江流域生物多样性空间分异特征研究},
+	journal = {生态学报},
+	volume = {37},
+	number = {19},
+	pages = {6448-6456},
+	year = {2017},
+	issn = {1000-0933},
+}    
+
+@article{2021魏万鸿,
+	author = {魏万鸿},
+	title = {甘肃北山地区矿产资源分布特征及勘查开发布局研究},
+	journal = {世界有色金属},
+	volume = {},
+	number = {03},
+	pages = {90-91},
+	year = {2021},
+	issn = {1002-5065},
+}    
