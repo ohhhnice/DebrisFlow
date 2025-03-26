@@ -272,7 +272,8 @@ async def get_frame_images(
     window_size: int = 75, 
     extract_freq: int = 1,
     point_x: Optional[int] = None,
-    point_y: Optional[int] = None
+    point_y: Optional[int] = None,
+    point_coordinates: Optional[str] = None
 ):
     """获取指定视频的帧图像"""
     try:
@@ -287,22 +288,37 @@ async def get_frame_images(
             extract_freq=extract_freq
         )
         
-        # 如果提供了兴趣点坐标，则在帧上绘制点
-        point_coordinates = None
+        # 处理坐标点
+        all_points = []
+        
+        # 如果提供了point_coordinates参数（多点）
+        if point_coordinates:
+            try:
+                import json
+                all_points = json.loads(point_coordinates)
+            except Exception as e:
+                print(f"解析坐标点错误: {e}")
+        
+        # 如果提供了单点坐标，也加入列表
         if point_x is not None and point_y is not None:
-            point_coordinates = [point_x, point_y]
+            all_points.append([point_x, point_y])
             
-            # 获取原始帧
-            start_frame = FrameProcessor.get_frame(video_path, frames_data['start_idx'])
-            end_frame = FrameProcessor.get_frame(video_path, frames_data['end_idx'])
+        # 获取原始帧
+        start_frame = FrameProcessor.get_frame(video_path, frames_data['start_idx'])
+        end_frame = FrameProcessor.get_frame(video_path, frames_data['end_idx'])
+        
+        # 绘制所有点
+        if all_points:
+            start_frame_with_points = start_frame.copy()
+            end_frame_with_points = end_frame.copy()
             
-            # 使用坐标绘制兴趣点并编码
-            frames_data['start_frame'] = FrameProcessor.encode_frame_with_point(
-                start_frame, point_coordinates
-            )
-            frames_data['end_frame'] = FrameProcessor.encode_frame_with_point(
-                end_frame, point_coordinates
-            )
+            for point in all_points:
+                # 绘制点，使用较大半径和红色
+                cv2.circle(start_frame_with_points, tuple(point), 10, (0, 0, 255), -1)
+                cv2.circle(end_frame_with_points, tuple(point), 10, (0, 0, 255), -1)
+            
+            frames_data['start_frame'] = FrameProcessor.encode_frame(start_frame_with_points)
+            frames_data['end_frame'] = FrameProcessor.encode_frame(end_frame_with_points)
         
         return frames_data
     except Exception as e:

@@ -18,7 +18,7 @@ const app = createApp({
             frame_idx: 1000,
             slice_windows_size: 75,
             extract_freq: 1,
-            point_coordinates: [800, 700],
+            point_coordinates: [[800, 700]],
             sam_video_sign: true,
             sam_model_type: 'vit_h',
             sam_model_device: 'auto', // auto为自动选择，将在后端处理
@@ -110,6 +110,35 @@ const app = createApp({
             }
         );
 
+        // 监听批处理参数的变化，更新预览帧
+        watch(
+            [
+                () => formData.batch_mode, 
+                () => formData.batch_start_frame, 
+                () => formData.batch_end_frame
+            ], 
+            () => {
+                if (formData.video_file_path && selectedVideoInfo.value) {
+                    // 确保批处理参数在有效范围内
+                    if (formData.batch_mode) {
+                        // 确保结束帧不超过视频总帧数
+                        if (formData.batch_end_frame >= selectedVideoInfo.value.total_frames) {
+                            formData.batch_end_frame = selectedVideoInfo.value.total_frames - 1;
+                        }
+                        
+                        // 确保起始帧小于等于结束帧
+                        if (formData.batch_start_frame > formData.batch_end_frame) {
+                            formData.batch_start_frame = formData.batch_end_frame;
+                        }
+                        
+                        // 使用批处理的起始帧作为预览帧
+                        formData.frame_idx = formData.batch_start_frame;
+                    }
+                    loadFrameImages();
+                }
+            }
+        );
+
         // 监听兴趣点坐标的变化
         watch(() => formData.point_coordinates, () => {
             if (formData.video_file_path) {
@@ -134,21 +163,72 @@ const app = createApp({
             
             isLoadingFrames.value = true;
             try {
-                const response = await axios.get(`${API_BASE_URL}/frame_images`, {
-                    params: {
-                        video_path: formData.video_file_path,
-                        frame_idx: formData.frame_idx,
-                        window_size: formData.slice_windows_size,
-                        extract_freq: formData.extract_freq,
-                        point_x: formData.point_coordinates[0],
-                        point_y: formData.point_coordinates[1]
+                // 在批处理模式下，加载起始帧和结束帧的预览
+                if (formData.batch_mode) {
+                    try {
+                        // 加载起始帧
+                        const startResponse = await axios.get(`${API_BASE_URL}/frame_images`, {
+                            params: {
+                                video_path: formData.video_file_path,
+                                frame_idx: formData.batch_start_frame,
+                                window_size: formData.slice_windows_size,
+                                extract_freq: formData.extract_freq,
+                                point_coordinates: JSON.stringify(formData.point_coordinates)
+                            }
+                        });
+                        
+                        // 加载结束帧
+                        const endResponse = await axios.get(`${API_BASE_URL}/frame_images`, {
+                            params: {
+                                video_path: formData.video_file_path,
+                                frame_idx: formData.batch_end_frame,
+                                window_size: formData.slice_windows_size,
+                                extract_freq: formData.extract_freq,
+                                point_coordinates: JSON.stringify(formData.point_coordinates)
+                            }
+                        });
+                        
+                        // 合并结果
+                        frameImages.value = {
+                            start_frame: startResponse.data.start_frame,
+                            end_frame: endResponse.data.start_frame,  // 使用结束帧的第一帧作为结束帧显示
+                            start_idx: formData.batch_start_frame,
+                            end_idx: formData.batch_end_frame
+                        };
+                    } catch (err) {
+                        console.error('获取批处理预览帧失败:', err);
+                        ElMessage.error('获取批处理预览帧失败，请检查帧索引是否有效');
+                        
+                        // 如果获取批处理预览失败，退回到单帧模式的预览
+                        const response = await axios.get(`${API_BASE_URL}/frame_images`, {
+                            params: {
+                                video_path: formData.video_file_path,
+                                frame_idx: formData.frame_idx,
+                                window_size: formData.slice_windows_size,
+                                extract_freq: formData.extract_freq,
+                                point_coordinates: JSON.stringify(formData.point_coordinates)
+                            }
+                        });
+                        
+                        frameImages.value = response.data;
                     }
-                });
-                
-                frameImages.value = response.data;
+                } else {
+                    // 单帧模式，使用原来的逻辑
+                    const response = await axios.get(`${API_BASE_URL}/frame_images`, {
+                        params: {
+                            video_path: formData.video_file_path,
+                            frame_idx: formData.frame_idx,
+                            window_size: formData.slice_windows_size,
+                            extract_freq: formData.extract_freq,
+                            point_coordinates: JSON.stringify(formData.point_coordinates)
+                        }
+                    });
+                    
+                    frameImages.value = response.data;
+                }
             } catch (error) {
                 console.error('获取帧图像失败:', error);
-                ElMessage.error('获取帧图像失败');
+                ElMessage.error('获取帧图像失败，请检查视频文件和参数');
             } finally {
                 isLoadingFrames.value = false;
             }
@@ -178,18 +258,82 @@ const app = createApp({
                     const height = parseInt(resolution[1]);
                     
                     // 计算实际坐标
-                    formData.point_coordinates = [
+                    const newPoint = [
                         Math.round(relX * width),
                         Math.round(relY * height)
                     ];
                     
-                    ElMessage.success(`已设置兴趣点坐标: [${formData.point_coordinates[0]}, ${formData.point_coordinates[1]}]`);
+                    // 添加新的点到列表中
+                    formData.point_coordinates.push(newPoint);
+                    
+                    ElMessage.success(`已添加兴趣点坐标: [${newPoint[0]}, ${newPoint[1]}]`);
                     
                     // 重新加载帧图像以显示兴趣点
                     loadFrameImages();
                 }
             }
         };
+
+        // 删除选中的兴趣点
+        const removePoint = (index) => {
+            formData.point_coordinates.splice(index, 1);
+            ElMessage.success('已删除选中的兴趣点');
+            loadFrameImages();
+        };
+
+        // 清空所有兴趣点
+        const clearPoints = () => {
+            formData.point_coordinates = [];
+            ElMessage.success('已清空所有兴趣点');
+            loadFrameImages();
+        };
+
+        // 解析输入的坐标文本
+        const parseCoordinatesText = (text) => {
+            try {
+                // 移除所有空格
+                text = text.replace(/\s+/g, '');
+                // 检查基本格式
+                if (!text.startsWith('[[') || !text.endsWith(']]')) {
+                    throw new Error('格式错误：请使用[[x1,y1],[x2,y2],...]格式');
+                }
+                // 提取内部内容
+                text = text.slice(2, -2);
+                // 分割每个点
+                const points = text.split('],[').map(point => {
+                    const [x, y] = point.split(',').map(num => parseInt(num.trim()));
+                    if (isNaN(x) || isNaN(y)) {
+                        throw new Error('坐标必须是数字');
+                    }
+                    return [x, y];
+                });
+                return points;
+            } catch (error) {
+                throw new Error(`解析失败：${error.message}`);
+            }
+        };
+
+        // 添加一个新的响应式变量用于存储输入的文本
+        const coordinatesText = ref('');
+
+        // 修改处理坐标文本输入的函数
+        const handleCoordinatesInput = (text) => {
+            try {
+                const points = parseCoordinatesText(text);
+                formData.point_coordinates = points;
+                ElMessage.success(`成功添加 ${points.length} 个坐标点`);
+                loadFrameImages();
+            } catch (error) {
+                ElMessage.error(error.message);
+            }
+        };
+
+        // 监听文本输入的变化
+        watch(coordinatesText, (newValue) => {
+            if (newValue.trim()) {
+                handleCoordinatesInput(newValue);
+            }
+        });
 
         // 选择视频
         const selectVideo = (videoPath) => {
@@ -397,6 +541,21 @@ const app = createApp({
             };
         };
         
+        // 添加单点输入的数据
+        const newPoint = reactive({
+            x: 0,
+            y: 0
+        });
+
+        // 添加单点的方法
+        const addSinglePoint = () => {
+            formData.point_coordinates.push([newPoint.x, newPoint.y]);
+            ElMessage.success(`已添加兴趣点坐标: [${newPoint.x}, ${newPoint.y}]`);
+            newPoint.x = 0;
+            newPoint.y = 0;
+            loadFrameImages();
+        };
+
         // 返回需要暴露给模板的属性和方法
         return {
             formData,
@@ -410,6 +569,8 @@ const app = createApp({
             isProcessing,
             processResult,
             isVideoSelected,
+            coordinatesText,
+            newPoint,
             fetchVideoList,
             selectVideo,
             uploadVideo,
@@ -420,7 +581,11 @@ const app = createApp({
             customUpload,
             formatFileSize,
             loadFrameImages,
-            selectPointOnImage
+            selectPointOnImage,
+            removePoint,
+            clearPoints,
+            handleCoordinatesInput,
+            addSinglePoint
         };
     },
     template: `
@@ -628,7 +793,10 @@ const app = createApp({
                         <el-form-item v-if="isVideoSelected && frameImages.start_frame" label="帧预览">
                             <div class="frames-preview">
                                 <div class="frame-container">
-                                    <div class="frame-title">起始帧 ({{ frameImages.start_idx }})</div>
+                                    <div class="frame-title">
+                                        <span v-if="formData.batch_mode">批处理起始帧 ({{ formData.batch_start_frame }})</span>
+                                        <span v-else>起始帧 ({{ frameImages.start_idx }})</span>
+                                    </div>
                                     <div class="frame-image-wrapper">
                                         <img 
                                             :src="'data:image/jpeg;base64,' + frameImages.start_frame" 
@@ -641,7 +809,10 @@ const app = createApp({
                                     </div>
                                 </div>
                                 <div class="frame-container">
-                                    <div class="frame-title">中心帧/结束帧 ({{ frameImages.end_idx }})</div>
+                                    <div class="frame-title">
+                                        <span v-if="formData.batch_mode">批处理结束帧 ({{ formData.batch_end_frame }})</span>
+                                        <span v-else>中心帧/结束帧 ({{ frameImages.end_idx }})</span>
+                                    </div>
                                     <div class="frame-image-wrapper">
                                         <img 
                                             :src="'data:image/jpeg;base64,' + frameImages.end_frame" 
@@ -654,7 +825,8 @@ const app = createApp({
                                     </div>
                                 </div>
                                 <div class="frames-info">
-                                    <p>切片视频范围：从帧 {{ frameImages.start_idx }} 到帧 {{ frameImages.end_idx }}（共 {{ frameImages.end_idx - frameImages.start_idx + 1 }} 帧）</p>
+                                    <p v-if="formData.batch_mode">批处理范围：从帧 {{ formData.batch_start_frame }} 到帧 {{ formData.batch_end_frame }}，步长 {{ formData.batch_step }}</p>
+                                    <p v-else>切片视频范围：从帧 {{ frameImages.start_idx }} 到帧 {{ frameImages.end_idx }}（共 {{ frameImages.end_idx - frameImages.start_idx + 1 }} 帧）</p>
                                     <el-button type="primary" size="small" @click="loadFrameImages" :loading="isLoadingFrames">
                                         刷新帧图像
                                     </el-button>
@@ -663,21 +835,66 @@ const app = createApp({
                         </el-form-item>
                         
                         <el-form-item label="兴趣点坐标" prop="point_coordinates">
-                            <el-input-number
-                                v-model="formData.point_coordinates[0]"
-                                :min="0"
-                                class="point-coord-input"
-                                placeholder="X坐标"
-                            ></el-input-number>
-                            <el-input-number
-                                v-model="formData.point_coordinates[1]"
-                                :min="0"
-                                class="point-coord-input"
-                                placeholder="Y坐标"
-                            ></el-input-number>
-                            <span v-if="selectedVideoInfo" class="param-hint">
-                                (请根据视频分辨率 {{ selectedVideoInfo.resolution }} 设置合适的坐标，或直接点击预览图像选择)
-                            </span>
+                            <div class="points-container">
+                                <!-- 批量输入 -->
+                                <div class="coordinates-input">
+                                    <el-input
+                                        type="textarea"
+                                        v-model="coordinatesText"
+                                        :rows="3"
+                                        placeholder="格式：[[x1,y1],[x2,y2],...] 示例：[[800,700],[1459,486]]"
+                                        class="wide-textarea"
+                                    ></el-input>
+                                </div>
+
+                                <!-- 单点输入 -->
+                                <div class="single-point-input">
+                                    <div class="point-inputs">
+                                        <el-input-number
+                                            v-model="newPoint.x"
+                                            :min="0"
+                                            class="point-coord-input"
+                                            placeholder="X坐标"
+                                        ></el-input-number>
+                                        <el-input-number
+                                            v-model="newPoint.y"
+                                            :min="0"
+                                            class="point-coord-input"
+                                            placeholder="Y坐标"
+                                        ></el-input-number>
+                                        <el-button type="primary" @click="addSinglePoint">添加坐标点</el-button>
+                                    </div>
+                                </div>
+
+                                <!-- 点列表 -->
+                                <div class="points-list" v-if="formData.point_coordinates.length > 0">
+                                    <div class="points-list-header">
+                                        <span class="points-list-title">已添加的坐标点列表</span>
+                                    </div>
+                                    <div class="points-grid">
+                                        <div v-for="(point, index) in formData.point_coordinates" :key="index" class="point-item">
+                                            <el-input-number
+                                                v-model="point[0]"
+                                                :min="0"
+                                                class="point-coord-input"
+                                                placeholder="X坐标"
+                                            ></el-input-number>
+                                            <el-input-number
+                                                v-model="point[1]"
+                                                :min="0"
+                                                class="point-coord-input"
+                                                placeholder="Y坐标"
+                                            ></el-input-number>
+                                            <el-button type="danger" size="small" circle @click="removePoint(index)">
+                                                <el-icon><Delete /></el-icon>
+                                            </el-button>
+                                        </div>
+                                    </div>
+                                    <div class="clear-points-container">
+                                        <el-button type="danger" plain @click="clearPoints" class="clear-btn">清空所有点</el-button>
+                                    </div>
+                                </div>
+                            </div>
                         </el-form-item>
                     </div>
                     
@@ -776,6 +993,11 @@ const app = createApp({
 
 // 使用Element Plus
 app.use(ElementPlus);
+
+// 注册所有图标
+for (const [key, component] of Object.entries(ElementPlusIconsVue)) {
+    app.component(key, component);
+}
 
 // 挂载应用
 app.mount('#app'); 

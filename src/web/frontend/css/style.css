@@ -1,7 +1,7 @@
 body {
-    font-family: 'Helvetica Neue', 'PingFang SC', 'Microsoft YaHei', sans-serif;
     margin: 0;
     padding: 0;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
     background-color: #f5f7fa;
 }
 
@@ -162,6 +162,7 @@ body {
     border: 1px solid #e0e0e0;
     border-radius: 4px;
     overflow: hidden;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
 }
 
 .frames-info {
@@ -176,17 +177,12 @@ body {
     align-items: center;
 }
 
-.frames-info p {
-    margin: 0;
-    color: #606266;
-    font-size: 14px;
-}
-
 .frame-title {
-    padding: 8px;
+    padding: 10px;
     background-color: #f5f7fa;
     color: #606266;
     font-size: 14px;
+    font-weight: bold;
     text-align: center;
     border-bottom: 1px solid #e0e0e0;
 }
@@ -195,6 +191,7 @@ body {
     position: relative;
     width: 100%;
     overflow: hidden;
+    background-color: #000;
 }
 
 .frame-image {
@@ -214,13 +211,12 @@ body {
     bottom: 0;
     left: 0;
     right: 0;
-    background-color: rgba(0, 0, 0, 0.5);
+    background-color: rgba(0, 0, 0, 0.6);
     color: white;
     text-align: center;
     padding: 8px;
     font-size: 12px;
-    opacity: 0;
-    transition: opacity 0.3s;
+    font-weight: bold;
 }
 
 .frame-image-wrapper:hover .frame-overlay {
@@ -252,4 +248,229 @@ body {
 
 .el-descriptions__content {
     color: #303133;
+}
+
+.el-header {
+    background-color: #409EFF;
+    color: white;
+    text-align: center;
+    line-height: 60px;
+}
+
+.el-main {
+    padding: 20px;
+}
+
+/* 表单样式 */
+.el-form {
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 4px;
+    box-shadow: 0 2px 12px 0 rgba(0,0,0,0.1);
+}
+
+/* 兴趣点坐标容器样式 */
+.points-container {
+    margin-bottom: 10px;
+}
+
+.point-item {
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px;
+    gap: 10px;
+}
+
+.point-tip {
+    color: #909399;
+    font-size: 12px;
+    margin-top: 5px;
+}
+
+/* 图像容器样式 */
+.image-container {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 4px;
+    box-shadow: 0 2px 12px 0 rgba(0,0,0,0.1);
+    position: relative;
+}
+
+.frame-image {
+    position: relative;
+    width: 100%;
+    height: auto;
+}
+
+.frame-image img {
+    width: 100%;
+    height: auto;
+    cursor: crosshair;
+    border-radius: 4px;
+}
+
+.loading-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(255, 255, 255, 0.8);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+}
+
+/* 响应式布局 */
+@media screen and (max-width: 768px) {
+    .el-col {
+        width: 100% !important;
+    }
+    
+    .point-coord-input {
+        width: 100px;
+    }
+}
+
+/* 坐标输入框样式 */
+.coordinates-input {
+    margin-bottom: 20px;
+    border: 1px solid #dcdfe6;
+    border-radius: 4px;
+    padding: 15px;
+    background-color: #f8f9fa;
+    width: 100%;
+}
+
+.coordinates-input .el-textarea {
+    margin-bottom: 0;
+    width: 100%;
+}
+
+.coordinates-input .el-textarea__inner {
+    font-family: monospace;
+    font-size: 14px;
+    width: 100%;
+}
+
+/* 宽文本框样式 */
+.wide-textarea .el-textarea__inner {
+    width: 100%;
+    min-width: 400px;
+}
+
+.input-tip {
+    color: #606266;
+    font-size: 13px;
+    margin-bottom: 8px;
+    font-weight: bold;
+}
+
+/* 单点输入区域样式 */
+.single-point-input {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin-bottom: 15px;
+    padding: 15px;
+    background-color: #f8f9fa;
+    border: 1px solid #dcdfe6;
+    border-radius: 4px;
+}
+
+.point-inputs {
+    display: flex;
+    align-items: center;
+    width: 100%;
+}
+
+.single-point-input .point-coord-input {
+    min-width: 130px;
+    margin-right: 10px;
+}
+
+/* 添加按钮样式 */
+.point-inputs .el-button {
+    margin-left: auto;
+}
+
+/* 点列表容器样式 */
+.points-list {
+    margin-top: 20px;
+    padding: 15px;
+    background-color: #fff;
+    border: 1px solid #dcdfe6;
+    border-radius: 4px;
+}
+
+.points-list-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 15px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid #ebeef5;
+}
+
+.header-buttons {
+    display: flex;
+    gap: 10px;
+}
+
+/* 清空按钮容器 */
+.clear-points-container {
+    display: flex;
+    justify-content: flex-end;
+    margin-top: 15px;
+    padding-top: 10px;
+    border-top: 1px solid #ebeef5;
+}
+
+.clear-btn {
+    margin-left: 0;
+}
+
+.points-list-title {
+    font-size: 14px;
+    font-weight: bold;
+    color: #606266;
+}
+
+.points-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 10px;
+}
+
+.point-item {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 8px 12px;
+    background-color: #f8f9fa;
+    border-radius: 4px;
+    transition: all 0.3s;
+}
+
+.point-item:hover {
+    background-color: #ecf5ff;
+}
+
+.point-index {
+    min-width: 25px;
+    color: #909399;
+    font-size: 13px;
+}
+
+.point-coord-input {
+    width: 110px !important;
+}
+
+/* 移除多余的样式 */
+.point-tip {
+    display: none;
 } 
